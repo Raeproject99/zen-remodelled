@@ -7,7 +7,7 @@
     --theme-compact-floating-bar-padding: 7px !important;
     --theme-compact-floating-button-size: 42px !important;
     --theme-compact-floating-button-radius: 8px !important;
-    --theme-compact-floating-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, black) !important;
+    --theme-compact-floating-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, #000) !important;
     --theme-compact-floating-border: color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
   }
 }
@@ -16,9 +16,10 @@
     --zen-toolbox-max-width: var(--theme-compact-floating-bar-width) !important;
     --zen-navigation-toolbar-min-width: var(--theme-compact-floating-bar-width) !important;
     position: fixed !important;
-    z-index: 10 !important;
     top: 0 !important;
     bottom: 0 !important;
+    z-index: 10 !important;
+    box-sizing: border-box !important;
     width: var(--theme-compact-floating-bar-width) !important;
     min-width: var(--theme-compact-floating-bar-width) !important;
     max-width: var(--theme-compact-floating-bar-width) !important;
@@ -28,19 +29,17 @@
     margin-block: auto !important;
     margin-inline: 0 !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
     overflow: clip !important;
     background: var(--theme-compact-floating-bg) !important;
     background-color: var(--theme-compact-floating-bg) !important;
     border: 1px solid var(--theme-compact-floating-border) !important;
     border-radius: var(--theme-compact-floating-bar-radius) !important;
-    box-shadow: 0 10px 26px color-mix(in srgb, black 36%, transparent) !important;
+    box-shadow: 0 10px 26px color-mix(in srgb, #000 36%, transparent) !important;
     transition: none !important;
   }
   :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] #titlebar {
-    visibility: visible !important;
-    opacity: 1 !important;
     position: relative !important;
+    box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -49,10 +48,11 @@
     max-height: 100% !important;
     margin: 0 !important;
     padding: var(--theme-compact-floating-bar-padding) 0 !important;
-    box-sizing: border-box !important;
     overflow: clip !important;
+    visibility: visible !important;
     background: transparent !important;
     border: 0 !important;
+    opacity: 1 !important;
     transition: none !important;
   }
   :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#zen-sidebar-top-buttons,
@@ -67,10 +67,10 @@
   .zen-workspace-close-unpinned-tabs-button,
   .pinned-tabs-container-separator) {
     display: none !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
     min-width: 0 !important;
     max-width: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     opacity: 0 !important;
@@ -94,6 +94,7 @@
   :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar toolbarbutton,
   #TabsToolbar .toolbarbutton-1,
   .tabbrowser-tab) {
+    box-sizing: border-box !important;
     width: var(--theme-compact-floating-button-size) !important;
     min-width: var(--theme-compact-floating-button-size) !important;
     max-width: var(--theme-compact-floating-button-size) !important;
@@ -102,27 +103,13 @@
     max-height: var(--theme-compact-floating-button-size) !important;
     margin: 3px auto !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
+    color: var(--theme-info) !important;
+    background-color: transparent !important;
     border: 0 !important;
     border-radius: var(--theme-compact-floating-button-radius) !important;
-    background-color: transparent !important;
-    color: var(--theme-info) !important;
     fill: currentColor !important;
     stroke: currentColor !important;
     opacity: 1 !important;
-  }
-  :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar toolbarbutton:hover,
-  #TabsToolbar .toolbarbutton-1:hover,
-  .tabbrowser-tab:hover .tab-background) {
-    background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
-    color: var(--theme-fg-strong) !important;
-  }
-  :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar toolbarbutton[open=true],
-  #TabsToolbar toolbarbutton[checked=true],
-  #TabsToolbar .toolbarbutton-1[open=true],
-  #TabsToolbar .toolbarbutton-1[checked=true]) {
-    background-color: var(--theme-bg-selected) !important;
-    color: var(--theme-info) !important;
   }
   :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar .toolbarbutton-icon,
   #TabsToolbar image.toolbarbutton-icon,
@@ -131,16 +118,16 @@
   .tab-throbber,
   .tab-icon-overlay) {
     width: 20px !important;
-    height: 20px !important;
     min-width: 20px !important;
+    height: 20px !important;
     min-height: 20px !important;
     margin: 0 !important;
     padding: 0 !important;
     color: currentColor !important;
     fill: currentColor !important;
     stroke: currentColor !important;
-    opacity: 1 !important;
     filter: none !important;
+    opacity: 1 !important;
   }
   :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar .toolbarbutton-text,
   .tab-label-container,
@@ -149,6 +136,19 @@
   .tab-icon-sound-label,
   .zen-current-workspace-indicator-name) {
     display: none !important;
+  }
+  :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar toolbarbutton:hover,
+  #TabsToolbar .toolbarbutton-1:hover,
+  .tabbrowser-tab:hover .tab-background) {
+    color: var(--theme-fg-strong) !important;
+    background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
+  }
+  :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] :is(#TabsToolbar toolbarbutton[open=true],
+  #TabsToolbar toolbarbutton[checked=true],
+  #TabsToolbar .toolbarbutton-1[open=true],
+  #TabsToolbar .toolbarbutton-1[checked=true]) {
+    color: var(--theme-info) !important;
+    background-color: var(--theme-bg-selected) !important;
   }
   :root[zen-compact-mode=true] #navigator-toolbox[zen-user-show] .tabbrowser-tab :is(.tab-stack,
   .tab-content,
@@ -169,8 +169,8 @@
 }
 @media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
   :root[zen-compact-mode=true]:not([zen-right-side=true]) #navigator-toolbox[zen-user-show] {
-    left: var(--theme-compact-floating-bar-gutter) !important;
     right: auto !important;
+    left: var(--theme-compact-floating-bar-gutter) !important;
   }
 }
 @media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {

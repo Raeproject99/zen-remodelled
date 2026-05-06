@@ -7,9 +7,9 @@
 sidebarheader,
 #sidebar,
 .sidebar-panel {
+  color: var(--theme-fg) !important;
   background: var(--theme-bg-subtle) !important;
   background-color: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
   border-color: var(--theme-bg-deep) !important;
 }
 
@@ -43,6 +43,25 @@ sidebarheader {
   opacity: 1 !important;
 }
 
+#sidebar-search-container,
+#search-box,
+.search-box {
+  color: var(--theme-fg) !important;
+  background-color: var(--theme-bg) !important;
+  border-color: var(--theme-border) !important;
+}
+
+#sidebar-splitter {
+  background-color: var(--theme-bg-deep) !important;
+  border-color: var(--theme-bg-deep) !important;
+  opacity: 1 !important;
+}
+
+#toolbar-menubar {
+  color: var(--theme-fg) !important;
+  background-color: var(--theme-bg) !important;
+}
+
 #zen-create-new-button,
 #downloads-button {
   --sidebar-footer-button-color: var(--theme-info);
@@ -54,20 +73,6 @@ sidebarheader {
   stroke: var(--sidebar-footer-button-color) !important;
   filter: none !important;
   opacity: 1 !important;
-}
-
-#zen-create-new-button:hover,
-#downloads-button:hover {
-  --sidebar-footer-button-color: var(--theme-info);
-  background-color: var(--theme-bg-selected) !important;
-  color: var(--sidebar-footer-button-color) !important;
-}
-
-#zen-create-new-button:is([open=true], [checked=true]),
-#downloads-button:is([open=true], [checked=true]) {
-  --sidebar-footer-button-color: var(--theme-accent);
-  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
-  color: var(--sidebar-footer-button-color) !important;
 }
 
 #zen-create-new-button > image.toolbarbutton-icon,
@@ -97,21 +102,16 @@ sidebarheader {
   color: var(--sidebar-footer-button-color) !important;
 }
 
-#sidebar-search-container,
-#search-box,
-.search-box {
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
-  border-color: var(--theme-border) !important;
+#zen-create-new-button:hover,
+#downloads-button:hover {
+  --sidebar-footer-button-color: var(--theme-info);
+  color: var(--sidebar-footer-button-color) !important;
+  background-color: var(--theme-bg-selected) !important;
 }
 
-#sidebar-splitter {
-  background-color: var(--theme-bg-deep) !important;
-  border-color: var(--theme-bg-deep) !important;
-  opacity: 1 !important;
-}
-
-#toolbar-menubar {
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
+#zen-create-new-button:is([open=true], [checked=true]),
+#downloads-button:is([open=true], [checked=true]) {
+  --sidebar-footer-button-color: var(--theme-accent);
+  color: var(--sidebar-footer-button-color) !important;
+  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
 }

@@ -1,3 +1,32 @@
+// ######################################## //
+// ## NAVIGATION TOOLBAR ## //
+// ######################################## //
+//
+// Browser chrome markup forces type, ID, and attribute selectors.
+
+$toolbar-background: var(--theme-bg) !default;
+$toolbar-subtle-background: var(--theme-bg-subtle) !default;
+$toolbar-hover-background: var(--theme-bg-selected) !default;
+$toolbar-active-background: color-mix(
+  in srgb,
+  var(--theme-accent) 22%,
+  transparent
+) !default;
+$toolbar-transparent-background: transparent !default;
+$toolbar-text-color: var(--theme-fg) !default;
+$toolbar-strong-text-color: var(--theme-fg-strong) !default;
+$toolbar-muted-text-color: var(--theme-fg-muted) !default;
+$toolbar-accent-color: var(--theme-accent) !default;
+$toolbar-border-color: var(--theme-bg-deep) !default;
+$toolbar-border-reset: transparent !default;
+$toolbar-radius-reset: 0 !default;
+$toolbar-shadow-reset: none !default;
+$toolbar-disabled-opacity: 0.55 !default;
+
+//
+// Shared toolbar surfaces
+//
+
 #navigator-toolbox,
 #titlebar,
 #TabsToolbar,
@@ -6,15 +35,15 @@
 #zen-appcontent-navbar-wrapper,
 #zen-appcontent-navbar-container,
 #zen-sidebar-top-buttons {
-  background: var(--theme-bg) !important;
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
-  border-color: var(--theme-bg-deep) !important;
-  box-shadow: none !important;
+  color: $toolbar-text-color !important;
+  background: $toolbar-background !important;
+  background-color: $toolbar-background !important;
+  border-color: $toolbar-border-color !important;
+  box-shadow: $toolbar-shadow-reset !important;
 }
 
 #nav-bar {
-  border-top-color: transparent !important;
+  border-top-color: $toolbar-border-reset !important;
 }
 
 .titlebar-buttonbox,
@@ -29,7 +58,7 @@ toolbarbutton,
 .toolbarbutton-icon,
 .toolbarbutton-text,
 .toolbarbutton-badge-stack {
-  color: var(--theme-fg) !important;
+  color: $toolbar-text-color !important;
   fill: currentColor !important;
   stroke: currentColor !important;
 }
@@ -38,53 +67,54 @@ toolbarbutton,
 .toolbarbutton-1,
 .subviewbutton,
 #PersonalToolbar .bookmark-item {
-  border-color: transparent !important;
-  border-radius: 0 !important;
-}
-
-toolbarbutton:hover,
-.toolbarbutton-1:hover,
-.subviewbutton:hover,
-#PersonalToolbar .bookmark-item:hover {
-  background-color: var(--theme-bg-selected) !important;
-  color: var(--theme-fg-strong) !important;
-}
-
-toolbarbutton[open="true"],
-toolbarbutton[checked="true"],
-.toolbarbutton-1[open="true"],
-.toolbarbutton-1[checked="true"],
-.subviewbutton[open="true"],
-.subviewbutton[checked="true"] {
-  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
-  color: var(--theme-accent) !important;
-}
-
-toolbarbutton[disabled="true"],
-.toolbarbutton-1[disabled="true"],
-#PersonalToolbar .bookmark-item[disabled="true"] {
-  color: var(--theme-fg-muted) !important;
-  opacity: 0.55 !important;
+  border-color: $toolbar-border-reset !important;
+  border-radius: $toolbar-radius-reset !important;
 }
 
 #PersonalToolbar,
 #PlacesToolbarItems,
 #personal-bookmarks {
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
+  color: $toolbar-text-color !important;
+  background-color: $toolbar-background !important;
 }
 
 #PersonalToolbar .bookmark-item {
-  background-color: transparent !important;
-  color: var(--theme-fg) !important;
+  color: $toolbar-text-color !important;
+  background-color: $toolbar-transparent-background !important;
 }
 
 #zen-overflow-extensions-list .unified-extensions-item-action-button {
-  background-color: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
+  color: $toolbar-text-color !important;
+  background-color: $toolbar-subtle-background !important;
+}
+
+//
+// Toolbar states
+//
+
+toolbarbutton:hover,
+.toolbarbutton-1:hover,
+.subviewbutton:hover,
+#PersonalToolbar .bookmark-item:hover {
+  color: $toolbar-strong-text-color !important;
+  background-color: $toolbar-hover-background !important;
+}
+
+toolbarbutton:is([open="true"], [checked="true"]),
+.toolbarbutton-1:is([open="true"], [checked="true"]),
+.subviewbutton:is([open="true"], [checked="true"]) {
+  color: $toolbar-accent-color !important;
+  background-color: $toolbar-active-background !important;
+}
+
+toolbarbutton[disabled="true"],
+.toolbarbutton-1[disabled="true"],
+#PersonalToolbar .bookmark-item[disabled="true"] {
+  color: $toolbar-muted-text-color !important;
+  opacity: $toolbar-disabled-opacity !important;
 }
 
 #zen-overflow-extensions-list .unified-extensions-item-action-button:hover {
-  background-color: var(--theme-bg-selected) !important;
-  color: var(--theme-fg-strong) !important;
+  color: $toolbar-strong-text-color !important;
+  background-color: $toolbar-hover-background !important;
 }

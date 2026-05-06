@@ -8,9 +8,9 @@
 #tabbrowser-tabpanels,
 browser[type=content],
 .browserContainer {
+  color: var(--theme-fg) !important;
   color-scheme: dark !important;
   background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
 }
 
 *,
@@ -29,9 +29,9 @@ body,
 .zen-browser-generic-background,
 .zen-browser-generic-background::before,
 .zen-browser-generic-background::after {
+  color: var(--theme-fg) !important;
   background: var(--theme-bg) !important;
   background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
 }
 
 #zen-main-app-wrapper {
@@ -50,6 +50,6 @@ splitter {
 }
 
 ::selection {
-  background-color: color-mix(in srgb, var(--theme-accent) 45%, transparent) !important;
   color: var(--theme-fg-strong) !important;
+  background-color: color-mix(in srgb, var(--theme-accent) 45%, transparent) !important;
 }

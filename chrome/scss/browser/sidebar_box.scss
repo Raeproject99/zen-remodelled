@@ -1,3 +1,29 @@
+// ######################################## //
+// ## SIDEBAR BOX ## //
+// ######################################## //
+//
+// Browser chrome markup forces type, ID, and attribute selectors.
+
+$sidebar-background: var(--theme-bg-subtle) !default;
+$sidebar-deep-background: var(--theme-bg-deep) !default;
+$sidebar-field-background: var(--theme-bg) !default;
+$sidebar-hover-background: var(--theme-bg-selected) !default;
+$sidebar-active-background: color-mix(
+  in srgb,
+  var(--theme-accent) 22%,
+  transparent
+) !default;
+$sidebar-text-color: var(--theme-fg) !default;
+$sidebar-info-color: var(--theme-info) !default;
+$sidebar-accent-color: var(--theme-accent) !default;
+$sidebar-border-color: var(--theme-border) !default;
+$sidebar-shadow-reset: none !default;
+$sidebar-opacity-visible: 1 !default;
+
+//
+// Shared sidebar surfaces
+//
+
 #zen-sidebar-top-buttons,
 #zen-sidebar-top-buttons-customization-target,
 #zen-tabs-wrapper,
@@ -7,26 +33,26 @@
 sidebarheader,
 #sidebar,
 .sidebar-panel {
-  background: var(--theme-bg-subtle) !important;
-  background-color: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
-  border-color: var(--theme-bg-deep) !important;
+  color: $sidebar-text-color !important;
+  background: $sidebar-background !important;
+  background-color: $sidebar-background !important;
+  border-color: $sidebar-deep-background !important;
 }
 
 #sidebar-box {
-  box-shadow: none !important;
+  box-shadow: $sidebar-shadow-reset !important;
 }
 
 #sidebar-header,
 sidebarheader {
-  border-bottom: 1px solid var(--theme-border) !important;
+  border-bottom: 1px solid $sidebar-border-color !important;
 }
 
 #sidebar-switcher-target,
 #sidebar-close,
 #sidebarMenu-popup toolbarbutton,
 #sidebarMenu-popup menuitem {
-  color: var(--theme-fg) !important;
+  color: $sidebar-text-color !important;
   fill: currentColor !important;
 }
 
@@ -37,15 +63,38 @@ sidebarheader {
 .zen-current-workspace-indicator-name,
 .zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > image:nth-child(2),
 .zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > label:nth-child(3) {
-  color: var(--theme-info) !important;
+  color: $sidebar-info-color !important;
   fill: currentColor !important;
   stroke: currentColor !important;
-  opacity: 1 !important;
+  opacity: $sidebar-opacity-visible !important;
 }
+
+#sidebar-search-container,
+#search-box,
+.search-box {
+  color: $sidebar-text-color !important;
+  background-color: $sidebar-field-background !important;
+  border-color: $sidebar-border-color !important;
+}
+
+#sidebar-splitter {
+  background-color: $sidebar-deep-background !important;
+  border-color: $sidebar-deep-background !important;
+  opacity: $sidebar-opacity-visible !important;
+}
+
+#toolbar-menubar {
+  color: $sidebar-text-color !important;
+  background-color: $sidebar-field-background !important;
+}
+
+//
+// Sidebar footer buttons
+//
 
 #zen-create-new-button,
 #downloads-button {
-  --sidebar-footer-button-color: var(--theme-info);
+  --sidebar-footer-button-color: #{$sidebar-info-color};
   --toolbarbutton-icon-fill: var(--sidebar-footer-button-color) !important;
   --toolbarbutton-icon-fill-attention: var(--sidebar-footer-button-color) !important;
   color: var(--sidebar-footer-button-color) !important;
@@ -53,21 +102,7 @@ sidebarheader {
   fill-opacity: 1 !important;
   stroke: var(--sidebar-footer-button-color) !important;
   filter: none !important;
-  opacity: 1 !important;
-}
-
-#zen-create-new-button:hover,
-#downloads-button:hover {
-  --sidebar-footer-button-color: var(--theme-info);
-  background-color: var(--theme-bg-selected) !important;
-  color: var(--sidebar-footer-button-color) !important;
-}
-
-#zen-create-new-button:is([open="true"], [checked="true"]),
-#downloads-button:is([open="true"], [checked="true"]) {
-  --sidebar-footer-button-color: var(--theme-accent);
-  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
-  color: var(--sidebar-footer-button-color) !important;
+  opacity: $sidebar-opacity-visible !important;
 }
 
 #zen-create-new-button > image.toolbarbutton-icon,
@@ -87,7 +122,7 @@ sidebarheader {
   fill-opacity: 1 !important;
   stroke: var(--sidebar-footer-button-color) !important;
   filter: none !important;
-  opacity: 1 !important;
+  opacity: $sidebar-opacity-visible !important;
 }
 
 #zen-create-new-button > .toolbarbutton-text,
@@ -97,21 +132,20 @@ sidebarheader {
   color: var(--sidebar-footer-button-color) !important;
 }
 
-#sidebar-search-container,
-#search-box,
-.search-box {
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
-  border-color: var(--theme-border) !important;
+//
+// Sidebar states
+//
+
+#zen-create-new-button:hover,
+#downloads-button:hover {
+  --sidebar-footer-button-color: #{$sidebar-info-color};
+  color: var(--sidebar-footer-button-color) !important;
+  background-color: $sidebar-hover-background !important;
 }
 
-#sidebar-splitter {
-  background-color: var(--theme-bg-deep) !important;
-  border-color: var(--theme-bg-deep) !important;
-  opacity: 1 !important;
-}
-
-#toolbar-menubar {
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
+#zen-create-new-button:is([open="true"], [checked="true"]),
+#downloads-button:is([open="true"], [checked="true"]) {
+  --sidebar-footer-button-color: #{$sidebar-accent-color};
+  color: var(--sidebar-footer-button-color) !important;
+  background-color: $sidebar-active-background !important;
 }

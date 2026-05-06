@@ -11,18 +11,18 @@ panel[type=arrow]:not(#feature-callout),
   --arrowpanel-background: var(--theme-bg-subtle) !important;
   --arrowpanel-color: var(--theme-fg) !important;
   --arrowpanel-border-color: var(--theme-border) !important;
-  background-color: var(--theme-bg-subtle) !important;
   color: var(--theme-fg) !important;
+  background-color: var(--theme-bg-subtle) !important;
   border-color: var(--theme-border) !important;
 }
 
 menupopup::part(content),
 panel::part(content),
 panel[type=arrow]:not(#feature-callout)::part(content) {
-  background-color: var(--theme-bg-subtle) !important;
   color: var(--theme-fg) !important;
+  background-color: var(--theme-bg-subtle) !important;
   border: 1px solid var(--theme-border) !important;
-  box-shadow: 0 14px 44px color-mix(in srgb, black 42%, transparent) !important;
+  box-shadow: 0 14px 44px color-mix(in srgb, #000 42%, transparent) !important;
 }
 
 menu,
@@ -31,25 +31,8 @@ menuitem,
 .panel-subview-footer-button,
 .PanelUI-subView toolbarbutton {
   color: var(--theme-fg) !important;
-  fill: currentColor !important;
   background-color: transparent !important;
-}
-
-menu[_moz-menuactive=true],
-menuitem[_moz-menuactive=true],
-.subviewbutton:hover,
-.subviewbutton:focus,
-.panel-subview-footer-button:hover,
-.PanelUI-subView toolbarbutton:hover {
-  background-color: var(--theme-bg-selected) !important;
-  color: var(--theme-fg-strong) !important;
-}
-
-menu[disabled=true],
-menuitem[disabled=true],
-.subviewbutton[disabled=true] {
-  color: var(--theme-fg-muted) !important;
-  opacity: 0.6 !important;
+  fill: currentColor !important;
 }
 
 menuseparator,
@@ -62,7 +45,24 @@ menuseparator,
 .panel-header > label,
 .panel-header > h1,
 .PanelUI-subView .panel-subview-header {
-  background-color: var(--theme-bg-deep) !important;
   color: var(--theme-fg-strong) !important;
+  background-color: var(--theme-bg-deep) !important;
   border-color: var(--theme-border) !important;
+}
+
+menu[_moz-menuactive=true],
+menuitem[_moz-menuactive=true],
+.subviewbutton:hover,
+.subviewbutton:focus,
+.panel-subview-footer-button:hover,
+.PanelUI-subView toolbarbutton:hover {
+  color: var(--theme-fg-strong) !important;
+  background-color: var(--theme-bg-selected) !important;
+}
+
+menu[disabled=true],
+menuitem[disabled=true],
+.subviewbutton[disabled=true] {
+  color: var(--theme-fg-muted) !important;
+  opacity: 0.6 !important;
 }

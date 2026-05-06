@@ -1,3 +1,25 @@
+// ######################################## //
+// ## BROWSER WINDOW ## //
+// ######################################## //
+//
+// Browser chrome markup forces type, ID, and attribute selectors.
+
+$browser-background: var(--theme-bg) !default;
+$browser-deep-background: var(--theme-bg-deep) !default;
+$browser-text-color: var(--theme-fg) !default;
+$browser-strong-text-color: var(--theme-fg-strong) !default;
+$browser-border-color: var(--theme-border) !default;
+$browser-radius-reset: 0 !default;
+$browser-selection-background: color-mix(
+  in srgb,
+  var(--theme-accent) 45%,
+  transparent
+) !default;
+
+//
+// Shared browser surfaces
+//
+
 :root,
 #main-window,
 #zen-main-app-wrapper,
@@ -8,20 +30,20 @@
 #tabbrowser-tabpanels,
 browser[type="content"],
 .browserContainer {
+  color: $browser-text-color !important;
   color-scheme: dark !important;
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
+  background-color: $browser-background !important;
 }
 
 *,
 ::before,
 ::after {
-  border-radius: 0 !important;
+  border-radius: $browser-radius-reset !important;
 }
 
 body,
 #tabbrowser-tabpanels {
-  background: var(--theme-bg) !important;
+  background: $browser-background !important;
 }
 
 #navigator-toolbox,
@@ -29,27 +51,27 @@ body,
 .zen-browser-generic-background,
 .zen-browser-generic-background::before,
 .zen-browser-generic-background::after {
-  background: var(--theme-bg) !important;
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
+  color: $browser-text-color !important;
+  background: $browser-background !important;
+  background-color: $browser-background !important;
 }
 
 #zen-main-app-wrapper {
-  background: var(--theme-bg) !important;
+  background: $browser-background !important;
 }
 
 #zen-appcontent-wrapper,
 #zen-tabbox-wrapper {
-  border-color: var(--theme-border) !important;
+  border-color: $browser-border-color !important;
 }
 
 #zen-sidebar-splitter,
 splitter {
-  background-color: var(--theme-bg-deep) !important;
-  border-color: var(--theme-border) !important;
+  background-color: $browser-deep-background !important;
+  border-color: $browser-border-color !important;
 }
 
 ::selection {
-  background-color: color-mix(in srgb, var(--theme-accent) 45%, transparent) !important;
-  color: var(--theme-fg-strong) !important;
+  color: $browser-strong-text-color !important;
+  background-color: $browser-selection-background !important;
 }

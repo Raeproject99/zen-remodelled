@@ -6,9 +6,9 @@
 #zen-appcontent-navbar-wrapper,
 #zen-appcontent-navbar-container,
 #zen-sidebar-top-buttons {
+  color: var(--theme-fg) !important;
   background: var(--theme-bg) !important;
   background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
   border-color: var(--theme-bg-deep) !important;
   box-shadow: none !important;
 }
@@ -42,22 +42,36 @@ toolbarbutton,
   border-radius: 0 !important;
 }
 
+#PersonalToolbar,
+#PlacesToolbarItems,
+#personal-bookmarks {
+  color: var(--theme-fg) !important;
+  background-color: var(--theme-bg) !important;
+}
+
+#PersonalToolbar .bookmark-item {
+  color: var(--theme-fg) !important;
+  background-color: transparent !important;
+}
+
+#zen-overflow-extensions-list .unified-extensions-item-action-button {
+  color: var(--theme-fg) !important;
+  background-color: var(--theme-bg-subtle) !important;
+}
+
 toolbarbutton:hover,
 .toolbarbutton-1:hover,
 .subviewbutton:hover,
 #PersonalToolbar .bookmark-item:hover {
-  background-color: var(--theme-bg-selected) !important;
   color: var(--theme-fg-strong) !important;
+  background-color: var(--theme-bg-selected) !important;
 }
 
-toolbarbutton[open=true],
-toolbarbutton[checked=true],
-.toolbarbutton-1[open=true],
-.toolbarbutton-1[checked=true],
-.subviewbutton[open=true],
-.subviewbutton[checked=true] {
-  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
+toolbarbutton:is([open=true], [checked=true]),
+.toolbarbutton-1:is([open=true], [checked=true]),
+.subviewbutton:is([open=true], [checked=true]) {
   color: var(--theme-accent) !important;
+  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
 }
 
 toolbarbutton[disabled=true],
@@ -67,24 +81,7 @@ toolbarbutton[disabled=true],
   opacity: 0.55 !important;
 }
 
-#PersonalToolbar,
-#PlacesToolbarItems,
-#personal-bookmarks {
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-fg) !important;
-}
-
-#PersonalToolbar .bookmark-item {
-  background-color: transparent !important;
-  color: var(--theme-fg) !important;
-}
-
-#zen-overflow-extensions-list .unified-extensions-item-action-button {
-  background-color: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
-}
-
 #zen-overflow-extensions-list .unified-extensions-item-action-button:hover {
-  background-color: var(--theme-bg-selected) !important;
   color: var(--theme-fg-strong) !important;
+  background-color: var(--theme-bg-selected) !important;
 }

@@ -1,3 +1,23 @@
+// ######################################## //
+// ## ARROW PANELS ## //
+// ######################################## //
+//
+// Browser chrome markup forces type, ID, and attribute selectors.
+
+$panel-background: var(--theme-bg-subtle) !default;
+$panel-header-background: var(--theme-bg-deep) !default;
+$panel-text-color: var(--theme-fg) !default;
+$panel-strong-text-color: var(--theme-fg-strong) !default;
+$panel-muted-text-color: var(--theme-fg-muted) !default;
+$panel-border-color: var(--theme-border) !default;
+$panel-transparent-background: transparent !default;
+$panel-shadow: 0 14px 44px color-mix(in srgb, #000 42%, transparent) !default;
+$panel-disabled-opacity: 0.6 !default;
+
+//
+// Shared panel surfaces
+//
+
 menupopup,
 panel,
 panel[type="arrow"]:not(#feature-callout),
@@ -5,24 +25,24 @@ panel[type="arrow"]:not(#feature-callout),
 .PanelUI-subView,
 .panel-viewstack,
 .panel-arrowcontent {
-  --panel-background: var(--theme-bg-subtle) !important;
-  --panel-color: var(--theme-fg) !important;
-  --panel-border-color: var(--theme-border) !important;
-  --arrowpanel-background: var(--theme-bg-subtle) !important;
-  --arrowpanel-color: var(--theme-fg) !important;
-  --arrowpanel-border-color: var(--theme-border) !important;
-  background-color: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
-  border-color: var(--theme-border) !important;
+  --panel-background: #{$panel-background} !important;
+  --panel-color: #{$panel-text-color} !important;
+  --panel-border-color: #{$panel-border-color} !important;
+  --arrowpanel-background: #{$panel-background} !important;
+  --arrowpanel-color: #{$panel-text-color} !important;
+  --arrowpanel-border-color: #{$panel-border-color} !important;
+  color: $panel-text-color !important;
+  background-color: $panel-background !important;
+  border-color: $panel-border-color !important;
 }
 
 menupopup::part(content),
 panel::part(content),
 panel[type="arrow"]:not(#feature-callout)::part(content) {
-  background-color: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
-  border: 1px solid var(--theme-border) !important;
-  box-shadow: 0 14px 44px color-mix(in srgb, black 42%, transparent) !important;
+  color: $panel-text-color !important;
+  background-color: $panel-background !important;
+  border: 1px solid $panel-border-color !important;
+  box-shadow: $panel-shadow !important;
 }
 
 menu,
@@ -30,10 +50,29 @@ menuitem,
 .subviewbutton,
 .panel-subview-footer-button,
 .PanelUI-subView toolbarbutton {
-  color: var(--theme-fg) !important;
+  color: $panel-text-color !important;
+  background-color: $panel-transparent-background !important;
   fill: currentColor !important;
-  background-color: transparent !important;
 }
+
+menuseparator,
+.toolbarseparator,
+.panel-separator {
+  border-color: $panel-border-color !important;
+}
+
+.panel-header,
+.panel-header > label,
+.panel-header > h1,
+.PanelUI-subView .panel-subview-header {
+  color: $panel-strong-text-color !important;
+  background-color: $panel-header-background !important;
+  border-color: $panel-border-color !important;
+}
+
+//
+// Panel item states
+//
 
 menu[_moz-menuactive="true"],
 menuitem[_moz-menuactive="true"],
@@ -41,29 +80,13 @@ menuitem[_moz-menuactive="true"],
 .subviewbutton:focus,
 .panel-subview-footer-button:hover,
 .PanelUI-subView toolbarbutton:hover {
+  color: $panel-strong-text-color !important;
   background-color: var(--theme-bg-selected) !important;
-  color: var(--theme-fg-strong) !important;
 }
 
 menu[disabled="true"],
 menuitem[disabled="true"],
 .subviewbutton[disabled="true"] {
-  color: var(--theme-fg-muted) !important;
-  opacity: 0.6 !important;
+  color: $panel-muted-text-color !important;
+  opacity: $panel-disabled-opacity !important;
 }
-
-menuseparator,
-.toolbarseparator,
-.panel-separator {
-  border-color: var(--theme-border) !important;
-}
-
-.panel-header,
-.panel-header > label,
-.panel-header > h1,
-.PanelUI-subView .panel-subview-header {
-  background-color: var(--theme-bg-deep) !important;
-  color: var(--theme-fg-strong) !important;
-  border-color: var(--theme-border) !important;
-}
-

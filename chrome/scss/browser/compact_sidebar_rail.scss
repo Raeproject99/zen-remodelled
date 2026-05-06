@@ -1,26 +1,62 @@
 @use "../abstracts/contexts" as context;
 @use "../abstracts/states" as state;
 
+// ######################################## //
+// ## COMPACT SIDEBAR RAIL ## //
+// ######################################## //
+//
+// Browser chrome markup forces ID and attribute selectors.
+
+$compact-rail-width: 68px !default;
+$compact-rail-height: 400px !default;
+$compact-rail-gutter: 12px !default;
+$compact-rail-radius: 12px !default;
+$compact-rail-padding: 7px !default;
+$compact-rail-button-size: 42px !default;
+$compact-rail-button-radius: 8px !default;
+$compact-rail-icon-size: 20px !default;
+$compact-rail-button-margin: 3px auto !default;
+$compact-rail-background: color-mix(in srgb, var(--theme-bg-deep) 94%, #000) !default;
+$compact-rail-border-color: color-mix(in srgb, var(--theme-info) 18%, transparent) !default;
+$compact-rail-shadow: 0 10px 26px color-mix(in srgb, #000 36%, transparent) !default;
+$compact-rail-transparent-background: transparent !default;
+$compact-rail-hover-background: color-mix(in srgb, var(--theme-fg) 12%, transparent) !default;
+$compact-rail-active-background: var(--theme-bg-selected) !default;
+$compact-rail-text-color: var(--theme-info) !default;
+$compact-rail-strong-text-color: var(--theme-fg-strong) !default;
+$compact-rail-accent-color: var(--theme-accent) !default;
+$compact-rail-shadow-reset: none !default;
+$compact-rail-transition-reset: none !default;
+
+//
+// Compact rail tokens
+//
+
 @include context.in-compact-mode {
-  --theme-compact-floating-bar-width: 68px !important;
-  --theme-compact-floating-bar-height: 400px !important;
-  --theme-compact-floating-bar-gutter: 12px !important;
-  --theme-compact-floating-bar-radius: 12px !important;
-  --theme-compact-floating-bar-padding: 7px !important;
-  --theme-compact-floating-button-size: 42px !important;
-  --theme-compact-floating-button-radius: 8px !important;
-  --theme-compact-floating-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, black) !important;
-  --theme-compact-floating-border: color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
+  --theme-compact-floating-bar-width: #{$compact-rail-width} !important;
+  --theme-compact-floating-bar-height: #{$compact-rail-height} !important;
+  --theme-compact-floating-bar-gutter: #{$compact-rail-gutter} !important;
+  --theme-compact-floating-bar-radius: #{$compact-rail-radius} !important;
+  --theme-compact-floating-bar-padding: #{$compact-rail-padding} !important;
+  --theme-compact-floating-button-size: #{$compact-rail-button-size} !important;
+  --theme-compact-floating-button-radius: #{$compact-rail-button-radius} !important;
+  --theme-compact-floating-bg: #{$compact-rail-background} !important;
+  --theme-compact-floating-border: #{$compact-rail-border-color} !important;
 }
+
+//
+// Revealed compact rail
+//
 
 @include context.user-revealed-compact-toolbox {
   --zen-toolbox-max-width: var(--theme-compact-floating-bar-width) !important;
   --zen-navigation-toolbar-min-width: var(--theme-compact-floating-bar-width) !important;
 
   position: fixed !important;
-  z-index: 10 !important;
   top: 0 !important;
   bottom: 0 !important;
+  z-index: 10 !important;
+  box-sizing: border-box !important;
   width: var(--theme-compact-floating-bar-width) !important;
   min-width: var(--theme-compact-floating-bar-width) !important;
   max-width: var(--theme-compact-floating-bar-width) !important;
@@ -33,19 +69,17 @@
   margin-block: auto !important;
   margin-inline: 0 !important;
   padding: 0 !important;
-  box-sizing: border-box !important;
   overflow: clip !important;
   background: var(--theme-compact-floating-bg) !important;
   background-color: var(--theme-compact-floating-bg) !important;
   border: 1px solid var(--theme-compact-floating-border) !important;
   border-radius: var(--theme-compact-floating-bar-radius) !important;
-  box-shadow: 0 10px 26px color-mix(in srgb, black 36%, transparent) !important;
-  transition: none !important;
+  box-shadow: $compact-rail-shadow !important;
+  transition: $compact-rail-transition-reset !important;
 
   #titlebar {
-    visibility: visible !important;
-    opacity: 1 !important;
     position: relative !important;
+    box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -54,11 +88,12 @@
     max-height: 100% !important;
     margin: 0 !important;
     padding: var(--theme-compact-floating-bar-padding) 0 !important;
-    box-sizing: border-box !important;
     overflow: clip !important;
-    background: transparent !important;
+    visibility: visible !important;
+    background: $compact-rail-transparent-background !important;
     border: 0 !important;
-    transition: none !important;
+    opacity: 1 !important;
+    transition: $compact-rail-transition-reset !important;
   }
 
   :is(
@@ -75,10 +110,10 @@
     .pinned-tabs-container-separator
   ) {
     display: none !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
     min-width: 0 !important;
     max-width: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     opacity: 0 !important;
@@ -97,10 +132,10 @@
     max-width: 100% !important;
     min-height: 0 !important;
     margin-inline: 0 !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+    background: $compact-rail-transparent-background !important;
+    background-color: $compact-rail-transparent-background !important;
+    border-color: $compact-rail-transparent-background !important;
+    box-shadow: $compact-rail-shadow-reset !important;
   }
 
   :is(
@@ -108,41 +143,22 @@
     #TabsToolbar .toolbarbutton-1,
     .tabbrowser-tab
   ) {
+    box-sizing: border-box !important;
     width: var(--theme-compact-floating-button-size) !important;
     min-width: var(--theme-compact-floating-button-size) !important;
     max-width: var(--theme-compact-floating-button-size) !important;
     height: var(--theme-compact-floating-button-size) !important;
     min-height: var(--theme-compact-floating-button-size) !important;
     max-height: var(--theme-compact-floating-button-size) !important;
-    margin: 3px auto !important;
+    margin: $compact-rail-button-margin !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
+    color: $compact-rail-text-color !important;
+    background-color: $compact-rail-transparent-background !important;
     border: 0 !important;
     border-radius: var(--theme-compact-floating-button-radius) !important;
-    background-color: transparent !important;
-    color: var(--theme-info) !important;
     fill: currentColor !important;
     stroke: currentColor !important;
     opacity: 1 !important;
-  }
-
-  :is(
-    #TabsToolbar toolbarbutton:hover,
-    #TabsToolbar .toolbarbutton-1:hover,
-    .tabbrowser-tab:hover .tab-background
-  ) {
-    background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
-    color: var(--theme-fg-strong) !important;
-  }
-
-  :is(
-    #TabsToolbar toolbarbutton[open="true"],
-    #TabsToolbar toolbarbutton[checked="true"],
-    #TabsToolbar .toolbarbutton-1[open="true"],
-    #TabsToolbar .toolbarbutton-1[checked="true"]
-  ) {
-    background-color: var(--theme-bg-selected) !important;
-    color: var(--theme-info) !important;
   }
 
   :is(
@@ -153,17 +169,17 @@
     .tab-throbber,
     .tab-icon-overlay
   ) {
-    width: 20px !important;
-    height: 20px !important;
-    min-width: 20px !important;
-    min-height: 20px !important;
+    width: $compact-rail-icon-size !important;
+    min-width: $compact-rail-icon-size !important;
+    height: $compact-rail-icon-size !important;
+    min-height: $compact-rail-icon-size !important;
     margin: 0 !important;
     padding: 0 !important;
     color: currentColor !important;
     fill: currentColor !important;
     stroke: currentColor !important;
-    opacity: 1 !important;
     filter: none !important;
+    opacity: 1 !important;
   }
 
   :is(
@@ -177,6 +193,25 @@
     display: none !important;
   }
 
+  :is(
+    #TabsToolbar toolbarbutton:hover,
+    #TabsToolbar .toolbarbutton-1:hover,
+    .tabbrowser-tab:hover .tab-background
+  ) {
+    color: $compact-rail-strong-text-color !important;
+    background-color: $compact-rail-hover-background !important;
+  }
+
+  :is(
+    #TabsToolbar toolbarbutton[open="true"],
+    #TabsToolbar toolbarbutton[checked="true"],
+    #TabsToolbar .toolbarbutton-1[open="true"],
+    #TabsToolbar .toolbarbutton-1[checked="true"]
+  ) {
+    color: $compact-rail-text-color !important;
+    background-color: $compact-rail-active-background !important;
+  }
+
   .tabbrowser-tab {
     :is(
       .tab-stack,
@@ -188,23 +223,27 @@
     }
 
     &#{state.$tab-active} {
-      outline: 1px solid var(--theme-accent) !important;
-      outline-color: var(--theme-accent) !important;
+      outline: 1px solid $compact-rail-accent-color !important;
+      outline-color: $compact-rail-accent-color !important;
       outline-offset: -1px !important;
 
       .tab-background {
-        background-color: var(--theme-bg-selected) !important;
-        border-color: var(--theme-accent) !important;
-        box-shadow: none !important;
+        background-color: $compact-rail-active-background !important;
+        border-color: $compact-rail-accent-color !important;
+        box-shadow: $compact-rail-shadow-reset !important;
       }
     }
   }
 }
 
+//
+// Compact rail position
+//
+
 @include context.in-left-compact-mode {
   #navigator-toolbox#{state.$toolbox-user-revealed} {
-    left: var(--theme-compact-floating-bar-gutter) !important;
     right: auto !important;
+    left: var(--theme-compact-floating-bar-gutter) !important;
   }
 }
 

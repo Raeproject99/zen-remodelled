@@ -1,83 +1,109 @@
 @use "../abstracts/states" as state;
 
+// ######################################## //
+// ## TAB BROWSER ## //
+// ######################################## //
+//
+// Browser chrome markup forces ID and attribute selectors.
+
+$tabs-background: var(--theme-bg-subtle) !default;
+$tabs-text-color: var(--theme-fg) !default;
+$tabs-muted-text-color: var(--theme-fg-muted) !default;
+$tabs-strong-text-color: var(--theme-fg-strong) !default;
+$tabs-info-color: var(--theme-info) !default;
+$tabs-accent-color: var(--theme-accent) !default;
+$tabs-accent-alt-color: var(--theme-accent-alt) !default;
+$tabs-alert-color: var(--theme-alert) !default;
+$tabs-transparent-color: transparent !default;
+$tabs-hover-background: color-mix(in srgb, var(--theme-fg) 9%, transparent) !default;
+$tabs-active-background: var(--theme-bg-selected) !default;
+$tabs-close-hover-background: color-mix(in srgb, var(--theme-alert) 20%, transparent) !default;
+$tabs-active-shadow: inset 2px 0 0 var(--theme-accent) !default;
+$tabs-shadow-reset: none !default;
+
+//
+// Shared tab surfaces
+//
+
 #tabbrowser-tabs,
 #vertical-tabs,
 #zen-tabs-wrapper,
 #zen-tabbox-wrapper {
-  background: var(--theme-bg-subtle) !important;
-  color: var(--theme-fg) !important;
+  color: $tabs-text-color !important;
+  background: $tabs-background !important;
 }
 
-.tabbrowser-tab {
-  &,
-  .tab-stack,
-  .tab-content {
-    color: var(--theme-fg-muted) !important;
-  }
+.tabbrowser-tab,
+.tabbrowser-tab .tab-stack,
+.tabbrowser-tab .tab-content {
+  color: $tabs-muted-text-color !important;
+}
 
-  .tab-background {
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-  }
-
-  &:hover .tab-background {
-    background-color: color-mix(in srgb, var(--theme-fg) 9%, transparent) !important;
-    border-color: var(--theme-border) !important;
-  }
-
-  &#{state.$tab-active} {
-    color: var(--theme-fg-strong) !important;
-
-    .tab-background {
-      background-color: var(--theme-bg-selected) !important;
-      border-color: var(--theme-accent) !important;
-      box-shadow: inset 2px 0 0 var(--theme-accent) !important;
-    }
-
-    .tab-label {
-      color: var(--theme-fg-strong) !important;
-    }
-  }
-
-  &[pending="true"] .tab-label,
-  &[discarded="true"] .tab-label {
-    color: var(--theme-fg-muted) !important;
-  }
-
-  &[busy] .tab-throbber,
-  &[progress] .tab-throbber,
-  .tab-loading-burst {
-    color: var(--theme-accent) !important;
-    fill: var(--theme-accent) !important;
-  }
-
-  &[soundplaying] .tab-icon-overlay,
-  &[muted] .tab-icon-overlay {
-    background-color: var(--theme-bg-selected) !important;
-    color: var(--theme-info) !important;
-    fill: var(--theme-info) !important;
-  }
+.tabbrowser-tab .tab-background {
+  background-color: $tabs-transparent-color !important;
+  border-color: $tabs-transparent-color !important;
+  box-shadow: $tabs-shadow-reset !important;
 }
 
 .tab-context-line {
-  background-color: var(--theme-accent-alt) !important;
+  background-color: $tabs-accent-alt-color !important;
 }
 
 .tab-close-button {
-  color: var(--theme-fg-muted) !important;
+  color: $tabs-muted-text-color !important;
   fill: currentColor !important;
-}
-
-.tab-close-button:hover {
-  background-color: color-mix(in srgb, var(--theme-alert) 20%, transparent) !important;
-  color: var(--theme-alert) !important;
 }
 
 #tabs-newtab-button .toolbarbutton-icon,
 #tabs-newtab-button .toolbarbutton-text {
-  color: var(--theme-info) !important;
+  color: $tabs-info-color !important;
   fill: currentColor !important;
   stroke: currentColor !important;
   opacity: 1 !important;
+}
+
+//
+// Tab states
+//
+
+.tabbrowser-tab {
+  &:hover .tab-background {
+    background-color: $tabs-hover-background !important;
+    border-color: var(--theme-border) !important;
+  }
+
+  &#{state.$tab-active} {
+    color: $tabs-strong-text-color !important;
+
+    .tab-background {
+      background-color: $tabs-active-background !important;
+      border-color: $tabs-accent-color !important;
+      box-shadow: $tabs-active-shadow !important;
+    }
+
+    .tab-label {
+      color: $tabs-strong-text-color !important;
+    }
+  }
+
+  &:is([pending="true"], [discarded="true"]) .tab-label {
+    color: $tabs-muted-text-color !important;
+  }
+
+  &:is([busy], [progress]) .tab-throbber,
+  .tab-loading-burst {
+    color: $tabs-accent-color !important;
+    fill: $tabs-accent-color !important;
+  }
+
+  &:is([soundplaying], [muted]) .tab-icon-overlay {
+    color: $tabs-info-color !important;
+    background-color: $tabs-active-background !important;
+    fill: $tabs-info-color !important;
+  }
+}
+
+.tab-close-button:hover {
+  color: $tabs-alert-color !important;
+  background-color: $tabs-close-hover-background !important;
 }
