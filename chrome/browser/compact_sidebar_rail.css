@@ -1,0 +1,197 @@
+@media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) {
+    --theme-compact-rail-width: 68px !important;
+    --theme-compact-rail-gutter: 12px !important;
+    --theme-compact-rail-radius: 12px !important;
+    --theme-compact-rail-padding: 7px !important;
+    --theme-compact-rail-button-size: 42px !important;
+    --theme-compact-rail-button-radius: 8px !important;
+    --theme-compact-rail-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, black) !important;
+    --theme-compact-rail-border: color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
+    --zen-toolbox-max-width: var(--theme-compact-rail-width) !important;
+    --zen-navigation-toolbar-min-width: var(--theme-compact-rail-width) !important;
+
+    position: fixed !important;
+    z-index: 10 !important;
+    top: var(--theme-compact-rail-gutter) !important;
+    bottom: var(--theme-compact-rail-gutter) !important;
+    width: var(--theme-compact-rail-width) !important;
+    min-width: var(--theme-compact-rail-width) !important;
+    max-width: var(--theme-compact-rail-width) !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: clip !important;
+    background: var(--theme-compact-rail-bg) !important;
+    background-color: var(--theme-compact-rail-bg) !important;
+    border: 1px solid var(--theme-compact-rail-border) !important;
+    border-radius: var(--theme-compact-rail-radius) !important;
+    box-shadow: 0 10px 26px color-mix(in srgb, black 36%, transparent) !important;
+    transition: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([zen-right-side="true"]):not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
+    left: var(--theme-compact-rail-gutter) !important;
+    right: auto !important;
+  }
+
+  :root[zen-compact-mode="true"][zen-right-side="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
+    right: var(--theme-compact-rail-gutter) !important;
+    left: auto !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) #titlebar {
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: var(--theme-compact-rail-padding) 0 !important;
+    box-sizing: border-box !important;
+    overflow: clip !important;
+    background: transparent !important;
+    border: 0 !important;
+    transition: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+    #TabsToolbar,
+    #tabbrowser-tabs,
+    #vertical-tabs,
+    #zen-tabs-wrapper,
+    #zen-tabbox-wrapper,
+    #zen-sidebar-top-buttons,
+    #zen-sidebar-top-buttons-customization-target,
+    #zen-sidebar-foot-buttons
+  ) {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+    #zen-sidebar-top-buttons toolbarbutton,
+    #zen-sidebar-top-buttons .toolbarbutton-1,
+    #zen-sidebar-foot-buttons toolbarbutton,
+    #zen-sidebar-foot-buttons .toolbarbutton-1,
+    #TabsToolbar toolbarbutton,
+    #TabsToolbar .toolbarbutton-1
+  ) {
+    width: var(--theme-compact-rail-button-size) !important;
+    min-width: var(--theme-compact-rail-button-size) !important;
+    max-width: var(--theme-compact-rail-button-size) !important;
+    height: var(--theme-compact-rail-button-size) !important;
+    min-height: var(--theme-compact-rail-button-size) !important;
+    max-height: var(--theme-compact-rail-button-size) !important;
+    margin: 3px auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    border: 0 !important;
+    border-radius: var(--theme-compact-rail-button-radius) !important;
+    background-color: transparent !important;
+    color: var(--theme-info) !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+    opacity: 1 !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+    #zen-sidebar-top-buttons toolbarbutton:hover,
+    #zen-sidebar-top-buttons .toolbarbutton-1:hover,
+    #zen-sidebar-foot-buttons toolbarbutton:hover,
+    #zen-sidebar-foot-buttons .toolbarbutton-1:hover,
+    #TabsToolbar toolbarbutton:hover,
+    #TabsToolbar .toolbarbutton-1:hover
+  ) {
+    background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
+    color: var(--theme-fg-strong) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+    toolbarbutton[open="true"],
+    toolbarbutton[checked="true"],
+    .toolbarbutton-1[open="true"],
+    .toolbarbutton-1[checked="true"]
+  ) {
+    background-color: var(--theme-bg-selected) !important;
+    color: var(--theme-info) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+    .toolbarbutton-icon,
+    image.toolbarbutton-icon,
+    .toolbarbutton-badge-stack,
+    #downloads-indicator-icon
+  ) {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: currentColor !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+    .toolbarbutton-text,
+    .tab-label-container,
+    .tab-secondary-label,
+    .tab-close-button,
+    .zen-current-workspace-indicator-name
+  ) {
+    display: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .tabbrowser-tab {
+    width: var(--theme-compact-rail-button-size) !important;
+    min-width: var(--theme-compact-rail-button-size) !important;
+    max-width: var(--theme-compact-rail-button-size) !important;
+    min-height: var(--theme-compact-rail-button-size) !important;
+    margin: 3px auto !important;
+    padding: 0 !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .tabbrowser-tab :is(
+    .tab-stack,
+    .tab-content,
+    .tab-background
+  ) {
+    min-height: var(--theme-compact-rail-button-size) !important;
+    border-radius: var(--theme-compact-rail-button-radius) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) .tab-background {
+    background-color: var(--theme-bg-selected) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .zen-current-workspace-indicator {
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    margin: 0 auto 8px !important;
+    border: 1px solid color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
+    border-radius: 999px !important;
+    background-color: color-mix(in srgb, var(--theme-bg-deep) 72%, transparent) !important;
+    color: var(--theme-info) !important;
+  }
+}

@@ -2,6 +2,9 @@
 
 Tokyo Night Dark Base24 theme for Zen Browser.
 
+Compact mode is styled as a persistent floating rail. For the cleanest toggle,
+set `zen.view.compact.animate-sidebar` to `false` in `about:config`.
+
 ## Sine
 
 Install this mod in Sine with:
