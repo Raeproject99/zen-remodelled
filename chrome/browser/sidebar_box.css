@@ -43,12 +43,6 @@ sidebarheader {
   opacity: 1 !important;
 }
 
-#zen-sidebar-top-buttons image,
-#zen-sidebar-top-buttons .toolbarbutton-icon,
-.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > image:nth-child(2) {
-  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--theme-info) 70%, transparent)) saturate(1.25) !important;
-}
-
 #zen-create-new-button,
 #downloads-button {
   --sidebar-footer-button-color: var(--theme-info);

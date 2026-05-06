@@ -79,5 +79,4 @@
   fill: currentColor !important;
   stroke: currentColor !important;
   opacity: 1 !important;
-  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--theme-info) 70%, transparent)) saturate(1.25) !important;
 }
