@@ -148,14 +148,16 @@ const start = () => {
       "browser[type='content']"
     ],
     sidebar: [
-      "#zen-tabs-wrapper",
       "#zen-tabbox-wrapper",
+      "#zen-tabs-wrapper",
+      "#zen-sidebar-top-buttons",
+      "#zen-sidebar-top-buttons-customization-target",
       "#sidebar-box",
       "#sidebar"
     ]
   };
 
-  const canUseFocusTarget = (element, name) => {
+  const canUseFocusTarget = (element, name, allowSmallSidebarPart = false) => {
     if (!element || element === urlbar || element.contains(urlbar) || urlbar.contains(element)) {
       return false;
     }
@@ -167,13 +169,13 @@ const start = () => {
 
     const rect = element.getBoundingClientRect();
     if (name === "sidebar") {
-      return rect.width > 96 && rect.height > 160;
+      return rect.width > 32 && rect.height > (allowSmallSidebarPart ? 8 : 160);
     }
 
     return rect.width > 32 && rect.height > 32;
   };
 
-  const getClampedRect = (element) => {
+  const getClampedRect = (element, minWidth = 32, minHeight = 32) => {
     const rect = element.getBoundingClientRect();
     const left = Math.max(0, rect.left);
     const top = Math.max(0, rect.top);
@@ -182,16 +184,61 @@ const start = () => {
     const width = right - left;
     const height = bottom - top;
 
-    if (width <= 32 || height <= 32) {
+    if (width <= minWidth || height <= minHeight) {
       return null;
     }
 
     return { left, top, width, height };
   };
 
-  const findFocusLayerTarget = (name) => {
+  const getUnionRect = (rects) => {
+    const left = Math.min(...rects.map((rect) => rect.left));
+    const top = Math.min(...rects.map((rect) => rect.top));
+    const right = Math.max(...rects.map((rect) => rect.left + rect.width));
+    const bottom = Math.max(...rects.map((rect) => rect.top + rect.height));
+
+    return {
+      left,
+      top,
+      width: right - left,
+      height: bottom - top
+    };
+  };
+
+  const getFocusLayerTargets = (name, allowSmallSidebarPart = false) => {
     const selectors = focusLayerTargets[name] || [];
-    return selectors.map((selector) => document.querySelector(selector)).find((element) => canUseFocusTarget(element, name));
+    const targets = new Set();
+
+    selectors.forEach((selector) => {
+      const element = document.querySelector(selector);
+      if (canUseFocusTarget(element, name, allowSmallSidebarPart)) {
+        targets.add(element);
+      }
+    });
+
+    return [...targets];
+  };
+
+  const findFocusLayerTarget = (name) => {
+    return getFocusLayerTargets(name)[0];
+  };
+
+  const getFocusLayerRect = (name) => {
+    if (name !== "sidebar") {
+      const target = findFocusLayerTarget(name);
+      return target ? getClampedRect(target) : null;
+    }
+
+    const rects = getFocusLayerTargets(name, true)
+      .map((target) => getClampedRect(target, 8, 8))
+      .filter(Boolean);
+    const hasFullHeightSidebarTarget = rects.some((rect) => rect.width > 96 && rect.height > 160);
+
+    if (!hasFullHeightSidebarTarget) {
+      return null;
+    }
+
+    return getUnionRect(rects);
   };
 
   const setFocusLayerRect = (layer, rect) => {
@@ -253,12 +300,7 @@ const start = () => {
       layer.removeAttribute("active");
       clearFocusLayerRect(layer);
 
-      const target = findFocusLayerTarget(name);
-      if (!target) {
-        return;
-      }
-
-      const rect = getClampedRect(target);
+      const rect = getFocusLayerRect(name);
       if (!rect) {
         return;
       }
