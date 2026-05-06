@@ -49,13 +49,34 @@ sidebarheader {
   filter: drop-shadow(0 0 5px color-mix(in srgb, var(--theme-info) 70%, transparent)) saturate(1.25) !important;
 }
 
-#zen-sidebar-foot-buttons #zen-create-new-button,
-#zen-sidebar-foot-buttons #downloads-button,
-#zen-sidebar-foot-buttons #zen-create-new-button :is(image, .toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack),
-#zen-sidebar-foot-buttons #downloads-button :is(image, .toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+#zen-create-new-button,
+#downloads-button {
   --toolbarbutton-icon-fill: currentColor !important;
   --toolbarbutton-icon-fill-attention: currentColor !important;
   color: var(--theme-fg) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+#zen-create-new-button:hover,
+#downloads-button:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+#zen-create-new-button:is([open="true"], [checked="true"]),
+#downloads-button:is([open="true"], [checked="true"]) {
+  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
+  color: var(--theme-accent) !important;
+}
+
+#zen-create-new-button :is(image, .toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack),
+#downloads-button :is(image, .toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+  --toolbarbutton-icon-fill: currentColor !important;
+  --toolbarbutton-icon-fill-attention: currentColor !important;
+  color: inherit !important;
   fill: currentColor !important;
   stroke: currentColor !important;
   filter: none !important;
