@@ -1,6 +1,6 @@
 menupopup,
 panel,
-panel[type=arrow]:not(#feature-callout),
+panel[type="arrow"]:not(#feature-callout),
 .panel-subview-body,
 .PanelUI-subView,
 .panel-viewstack,
@@ -18,7 +18,7 @@ panel[type=arrow]:not(#feature-callout),
 
 menupopup::part(content),
 panel::part(content),
-panel[type=arrow]:not(#feature-callout)::part(content) {
+panel[type="arrow"]:not(#feature-callout)::part(content) {
   background-color: var(--theme-bg-subtle) !important;
   color: var(--theme-fg) !important;
   border: 1px solid var(--theme-border) !important;
@@ -35,8 +35,8 @@ menuitem,
   background-color: transparent !important;
 }
 
-menu[_moz-menuactive=true],
-menuitem[_moz-menuactive=true],
+menu[_moz-menuactive="true"],
+menuitem[_moz-menuactive="true"],
 .subviewbutton:hover,
 .subviewbutton:focus,
 .panel-subview-footer-button:hover,
@@ -45,9 +45,9 @@ menuitem[_moz-menuactive=true],
   color: var(--theme-fg-strong) !important;
 }
 
-menu[disabled=true],
-menuitem[disabled=true],
-.subviewbutton[disabled=true] {
+menu[disabled="true"],
+menuitem[disabled="true"],
+.subviewbutton[disabled="true"] {
   color: var(--theme-fg-muted) !important;
   opacity: 0.6 !important;
 }
@@ -66,3 +66,4 @@ menuseparator,
   color: var(--theme-fg-strong) !important;
   border-color: var(--theme-border) !important;
 }
+

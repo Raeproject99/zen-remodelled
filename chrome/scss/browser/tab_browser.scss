@@ -1,0 +1,83 @@
+@use "../abstracts/states" as state;
+
+#tabbrowser-tabs,
+#vertical-tabs,
+#zen-tabs-wrapper,
+#zen-tabbox-wrapper {
+  background: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+}
+
+.tabbrowser-tab {
+  &,
+  .tab-stack,
+  .tab-content {
+    color: var(--theme-fg-muted) !important;
+  }
+
+  .tab-background {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  &:hover .tab-background {
+    background-color: color-mix(in srgb, var(--theme-fg) 9%, transparent) !important;
+    border-color: var(--theme-border) !important;
+  }
+
+  &#{state.$tab-active} {
+    color: var(--theme-fg-strong) !important;
+
+    .tab-background {
+      background-color: var(--theme-bg-selected) !important;
+      border-color: var(--theme-accent) !important;
+      box-shadow: inset 2px 0 0 var(--theme-accent) !important;
+    }
+
+    .tab-label {
+      color: var(--theme-fg-strong) !important;
+    }
+  }
+
+  &[pending="true"] .tab-label,
+  &[discarded="true"] .tab-label {
+    color: var(--theme-fg-muted) !important;
+  }
+
+  &[busy] .tab-throbber,
+  &[progress] .tab-throbber,
+  .tab-loading-burst {
+    color: var(--theme-accent) !important;
+    fill: var(--theme-accent) !important;
+  }
+
+  &[soundplaying] .tab-icon-overlay,
+  &[muted] .tab-icon-overlay {
+    background-color: var(--theme-bg-selected) !important;
+    color: var(--theme-info) !important;
+    fill: var(--theme-info) !important;
+  }
+}
+
+.tab-context-line {
+  background-color: var(--theme-accent-alt) !important;
+}
+
+.tab-close-button {
+  color: var(--theme-fg-muted) !important;
+  fill: currentColor !important;
+}
+
+.tab-close-button:hover {
+  background-color: color-mix(in srgb, var(--theme-alert) 20%, transparent) !important;
+  color: var(--theme-alert) !important;
+}
+
+#tabs-newtab-button .toolbarbutton-icon,
+#tabs-newtab-button .toolbarbutton-text {
+  color: var(--theme-info) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}

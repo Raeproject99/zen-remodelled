@@ -50,19 +50,19 @@ toolbarbutton:hover,
   color: var(--theme-fg-strong) !important;
 }
 
-toolbarbutton[open=true],
-toolbarbutton[checked=true],
-.toolbarbutton-1[open=true],
-.toolbarbutton-1[checked=true],
-.subviewbutton[open=true],
-.subviewbutton[checked=true] {
+toolbarbutton[open="true"],
+toolbarbutton[checked="true"],
+.toolbarbutton-1[open="true"],
+.toolbarbutton-1[checked="true"],
+.subviewbutton[open="true"],
+.subviewbutton[checked="true"] {
   background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
   color: var(--theme-accent) !important;
 }
 
-toolbarbutton[disabled=true],
-.toolbarbutton-1[disabled=true],
-#PersonalToolbar .bookmark-item[disabled=true] {
+toolbarbutton[disabled="true"],
+.toolbarbutton-1[disabled="true"],
+#PersonalToolbar .bookmark-item[disabled="true"] {
   color: var(--theme-fg-muted) !important;
   opacity: 0.55 !important;
 }

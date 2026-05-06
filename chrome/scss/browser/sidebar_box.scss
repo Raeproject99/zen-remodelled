@@ -63,8 +63,8 @@ sidebarheader {
   color: var(--sidebar-footer-button-color) !important;
 }
 
-#zen-create-new-button:is([open=true], [checked=true]),
-#downloads-button:is([open=true], [checked=true]) {
+#zen-create-new-button:is([open="true"], [checked="true"]),
+#downloads-button:is([open="true"], [checked="true"]) {
   --sidebar-footer-button-color: var(--theme-accent);
   background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
   color: var(--sidebar-footer-button-color) !important;

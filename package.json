@@ -1,0 +1,11 @@
+{
+  "name": "zen-remodelled",
+  "version": "0.1.12",
+  "private": true,
+  "scripts": {
+    "build:scss": "sass --no-source-map --silence-deprecation=moz-document chrome/scss/base24/base24_tokyo_night_dark.scss:chrome/base24/base24_tokyo_night_dark.css chrome/scss/browser/arrow_panels.scss:chrome/browser/arrow_panels.css chrome/scss/browser/browser_window.scss:chrome/browser/browser_window.css chrome/scss/browser/navigation_toolbar.scss:chrome/browser/navigation_toolbar.css chrome/scss/browser/tab_browser.scss:chrome/browser/tab_browser.css chrome/scss/browser/urlbar.scss:chrome/browser/urlbar.css chrome/scss/browser/sidebar_box.scss:chrome/browser/sidebar_box.css chrome/scss/browser/compact_sidebar_rail.scss:chrome/browser/compact_sidebar_rail.css chrome/scss/content/about_pages.scss:chrome/content/about_pages.css chrome/scss/userChrome.scss:chrome/userChrome.css chrome/scss/userContent.scss:chrome/userContent.css && node scripts/restore_moz_pref_media.mjs"
+  },
+  "devDependencies": {
+    "sass": "^1.93.2"
+  }
+}

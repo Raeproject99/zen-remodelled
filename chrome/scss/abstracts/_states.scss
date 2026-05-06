@@ -1,0 +1,17 @@
+$root-customizing-toolbar: '[customizing]';
+$root-page-dom-fullscreen: '[inDOMFullscreen="true"]';
+
+$root-compact-mode: '[zen-compact-mode="true"]';
+$root-tabs-on-right: '[zen-right-side="true"]';
+
+$toolbox-user-revealed: '[zen-user-show]';
+$toolbox-transitioning: '[animate="true"]';
+
+$urlbar-open: '[open]';
+$urlbar-open-true: '[open="true"]';
+$urlbar-focused: '[focused="true"]';
+$urlbar-layout-expanded: '[breakout-extend="true"]';
+$urlbar-floating-layout: '[zen-floating-urlbar="true"]';
+$urlbar-active-floating: ':is(#{$urlbar-open}, #{$urlbar-focused}, #{$urlbar-layout-expanded})#{$urlbar-floating-layout}';
+
+$tab-active: ':is([selected="true"], [visuallyselected="true"])';

@@ -1,4 +1,5 @@
 .DS_Store
 /zen-*.css
+/node_modules/
 *.swp
 *.swo

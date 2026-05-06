@@ -1,0 +1,59 @@
+@use "states";
+
+$compact-rail-query: "(width >= 0px)";
+
+@mixin compact-rail-feature {
+  @media #{$compact-rail-query} {
+    @content;
+  }
+}
+
+@mixin in-compact-mode {
+  @include compact-rail-feature {
+    :root#{states.$root-compact-mode} {
+      @content;
+    }
+  }
+}
+
+@mixin in-left-compact-mode {
+  @include compact-rail-feature {
+    :root#{states.$root-compact-mode}:not(#{states.$root-tabs-on-right}) {
+      @content;
+    }
+  }
+}
+
+@mixin in-right-compact-mode {
+  @include compact-rail-feature {
+    :root#{states.$root-compact-mode}#{states.$root-tabs-on-right} {
+      @content;
+    }
+  }
+}
+
+@mixin user-revealed-compact-toolbox {
+  @include in-compact-mode {
+    #navigator-toolbox#{states.$toolbox-user-revealed} {
+      @content;
+    }
+  }
+}
+
+@mixin while-customizing-toolbar {
+  :root#{states.$root-customizing-toolbar} {
+    @content;
+  }
+}
+
+@mixin while-page-dom-fullscreen {
+  :root#{states.$root-page-dom-fullscreen} {
+    @content;
+  }
+}
+
+@mixin while-compact-toolbox-transitioning {
+  #navigator-toolbox#{states.$toolbox-transitioning} {
+    @content;
+  }
+}

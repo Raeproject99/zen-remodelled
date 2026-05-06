@@ -1,0 +1,998 @@
+menupopup,
+panel,
+panel[type="arrow"]:not(#feature-callout),
+.panel-subview-body,
+.PanelUI-subView,
+.panel-viewstack,
+.panel-arrowcontent {
+  --panel-background: var(--theme-bg-subtle) !important;
+  --panel-color: var(--theme-fg) !important;
+  --panel-border-color: var(--theme-border) !important;
+  --arrowpanel-background: var(--theme-bg-subtle) !important;
+  --arrowpanel-color: var(--theme-fg) !important;
+  --arrowpanel-border-color: var(--theme-border) !important;
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-border) !important;
+}
+
+menupopup::part(content),
+panel::part(content),
+panel[type="arrow"]:not(#feature-callout)::part(content) {
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+  border: 1px solid var(--theme-border) !important;
+  box-shadow: 0 14px 44px color-mix(in srgb, black 42%, transparent) !important;
+}
+
+menu,
+menuitem,
+.subviewbutton,
+.panel-subview-footer-button,
+.PanelUI-subView toolbarbutton {
+  color: var(--theme-fg) !important;
+  fill: currentColor !important;
+  background-color: transparent !important;
+}
+
+menu[_moz-menuactive="true"],
+menuitem[_moz-menuactive="true"],
+.subviewbutton:hover,
+.subviewbutton:focus,
+.panel-subview-footer-button:hover,
+.PanelUI-subView toolbarbutton:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+menu[disabled="true"],
+menuitem[disabled="true"],
+.subviewbutton[disabled="true"] {
+  color: var(--theme-fg-muted) !important;
+  opacity: 0.6 !important;
+}
+
+menuseparator,
+.toolbarseparator,
+.panel-separator {
+  border-color: var(--theme-border) !important;
+}
+
+.panel-header,
+.panel-header > label,
+.panel-header > h1,
+.PanelUI-subView .panel-subview-header {
+  background-color: var(--theme-bg-deep) !important;
+  color: var(--theme-fg-strong) !important;
+  border-color: var(--theme-border) !important;
+}
+
+:root,
+#main-window,
+#zen-main-app-wrapper,
+#zen-appcontent-wrapper,
+#browser,
+#appcontent,
+#tabbrowser-tabbox,
+#tabbrowser-tabpanels,
+browser[type="content"],
+.browserContainer {
+  color-scheme: dark !important;
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+*,
+::before,
+::after {
+  border-radius: 0 !important;
+}
+
+body,
+#tabbrowser-tabpanels {
+  background: var(--theme-bg) !important;
+}
+
+#navigator-toolbox,
+#zen-browser-background,
+.zen-browser-generic-background,
+.zen-browser-generic-background::before,
+.zen-browser-generic-background::after {
+  background: var(--theme-bg) !important;
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+#zen-main-app-wrapper {
+  background: var(--theme-bg) !important;
+}
+
+#zen-appcontent-wrapper,
+#zen-tabbox-wrapper {
+  border-color: var(--theme-border) !important;
+}
+
+#zen-sidebar-splitter,
+splitter {
+  background-color: var(--theme-bg-deep) !important;
+  border-color: var(--theme-border) !important;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--theme-accent) 45%, transparent) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+
+@media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) {
+    --theme-compact-floating-bar-width: 68px !important;
+    --theme-compact-floating-bar-height: 400px !important;
+    --theme-compact-floating-bar-gutter: 12px !important;
+    --theme-compact-floating-bar-radius: 12px !important;
+    --theme-compact-floating-bar-padding: 7px !important;
+    --theme-compact-floating-button-size: 42px !important;
+    --theme-compact-floating-button-radius: 8px !important;
+    --theme-compact-floating-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, black) !important;
+    --theme-compact-floating-border: color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
+    --zen-toolbox-max-width: var(--theme-compact-floating-bar-width) !important;
+    --zen-navigation-toolbar-min-width: var(--theme-compact-floating-bar-width) !important;
+
+    position: fixed !important;
+    z-index: 10 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: var(--theme-compact-floating-bar-width) !important;
+    min-width: var(--theme-compact-floating-bar-width) !important;
+    max-width: var(--theme-compact-floating-bar-width) !important;
+    height: min(
+      var(--theme-compact-floating-bar-height),
+      calc(100vh - var(--theme-compact-floating-bar-gutter) * 2)
+    ) !important;
+    min-height: 0 !important;
+    max-height: calc(100vh - var(--theme-compact-floating-bar-gutter) * 2) !important;
+    margin-block: auto !important;
+    margin-inline: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: clip !important;
+    background: var(--theme-compact-floating-bg) !important;
+    background-color: var(--theme-compact-floating-bg) !important;
+    border: 1px solid var(--theme-compact-floating-border) !important;
+    border-radius: var(--theme-compact-floating-bar-radius) !important;
+    box-shadow: 0 10px 26px color-mix(in srgb, black 36%, transparent) !important;
+    transition: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]):has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]) {
+    overflow: visible !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([zen-right-side="true"]):not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
+    left: var(--theme-compact-floating-bar-gutter) !important;
+    right: auto !important;
+  }
+
+  :root[zen-compact-mode="true"][zen-right-side="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
+    right: var(--theme-compact-floating-bar-gutter) !important;
+    left: auto !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #titlebar {
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    margin: 0 !important;
+    padding: var(--theme-compact-floating-bar-padding) 0 !important;
+    box-sizing: border-box !important;
+    overflow: clip !important;
+    background: transparent !important;
+    border: 0 !important;
+    transition: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #zen-sidebar-top-buttons,
+    #zen-sidebar-top-buttons-customization-target,
+    #titlebar-buttonbox-container,
+    .titlebar-buttonbox-container,
+    #nav-bar-overflow-button,
+    #downloads-button,
+    #zen-create-new-button,
+    #tabbrowser-arrowscrollbox-periphery,
+    .zen-current-workspace-indicator,
+    .zen-workspace-close-unpinned-tabs-button,
+    .pinned-tabs-container-separator
+  ) {
+    display: none !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #nav-bar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #titlebar:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]),
+    #nav-bar:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]),
+    #nav-bar-customization-target:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]),
+    #urlbar-container:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"])
+  ) {
+    overflow: visible !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #nav-bar-customization-target {
+    display: flex !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #nav-bar-customization-target > *:not(#urlbar-container) {
+    display: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #urlbar-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"] {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #TabsToolbar,
+    #tabbrowser-tabs,
+    #vertical-tabs,
+    #zen-tabs-wrapper,
+    #zen-tabbox-wrapper
+  ) {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin-inline: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #TabsToolbar toolbarbutton,
+    #TabsToolbar .toolbarbutton-1,
+    .tabbrowser-tab
+  ) {
+    width: var(--theme-compact-floating-button-size) !important;
+    min-width: var(--theme-compact-floating-button-size) !important;
+    max-width: var(--theme-compact-floating-button-size) !important;
+    height: var(--theme-compact-floating-button-size) !important;
+    min-height: var(--theme-compact-floating-button-size) !important;
+    max-height: var(--theme-compact-floating-button-size) !important;
+    margin: 3px auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    border: 0 !important;
+    border-radius: var(--theme-compact-floating-button-radius) !important;
+    background-color: transparent !important;
+    color: var(--theme-info) !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+    opacity: 1 !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #TabsToolbar toolbarbutton:hover,
+    #TabsToolbar .toolbarbutton-1:hover,
+    .tabbrowser-tab:hover .tab-background
+  ) {
+    background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
+    color: var(--theme-fg-strong) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #TabsToolbar toolbarbutton[open="true"],
+    #TabsToolbar toolbarbutton[checked="true"],
+    #TabsToolbar .toolbarbutton-1[open="true"],
+    #TabsToolbar .toolbarbutton-1[checked="true"]
+  ) {
+    background-color: var(--theme-bg-selected) !important;
+    color: var(--theme-info) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #TabsToolbar .toolbarbutton-icon,
+    #TabsToolbar image.toolbarbutton-icon,
+    #TabsToolbar .toolbarbutton-badge-stack,
+    .tab-icon-image,
+    .tab-throbber,
+    .tab-icon-overlay
+  ) {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: currentColor !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #TabsToolbar .toolbarbutton-text,
+    .tab-label-container,
+    .tab-secondary-label,
+    .tab-close-button,
+    .tab-icon-sound-label,
+    .zen-current-workspace-indicator-name
+  ) {
+    display: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab :is(
+    .tab-stack,
+    .tab-content,
+    .tab-background
+  ) {
+    min-height: var(--theme-compact-floating-button-size) !important;
+    border-radius: var(--theme-compact-floating-button-radius) !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) {
+    outline: 1px solid var(--theme-accent) !important;
+    outline-color: var(--theme-accent) !important;
+    outline-offset: -1px !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) .tab-background {
+    background-color: var(--theme-bg-selected) !important; /* i choose the wrong color before */
+    border-color: var(--theme-accent) !important;
+    box-shadow: none !important;
+  }
+
+#navigator-toolbox,
+#titlebar,
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar,
+#zen-appcontent-navbar-wrapper,
+#zen-appcontent-navbar-container,
+#zen-sidebar-top-buttons {
+  background: var(--theme-bg) !important;
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-bg-deep) !important;
+  box-shadow: none !important;
+}
+
+#nav-bar {
+  border-top-color: transparent !important;
+}
+
+.titlebar-buttonbox,
+#zen-appcontent-navbar-container {
+  display: none !important;
+}
+
+toolbar,
+toolbaritem,
+toolbarbutton,
+.toolbarbutton-1,
+.toolbarbutton-icon,
+.toolbarbutton-text,
+.toolbarbutton-badge-stack {
+  color: var(--theme-fg) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+toolbarbutton,
+.toolbarbutton-1,
+.subviewbutton,
+#PersonalToolbar .bookmark-item {
+  border-color: transparent !important;
+  border-radius: 0 !important;
+}
+
+toolbarbutton:hover,
+.toolbarbutton-1:hover,
+.subviewbutton:hover,
+#PersonalToolbar .bookmark-item:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+toolbarbutton[open="true"],
+toolbarbutton[checked="true"],
+.toolbarbutton-1[open="true"],
+.toolbarbutton-1[checked="true"],
+.subviewbutton[open="true"],
+.subviewbutton[checked="true"] {
+  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
+  color: var(--theme-accent) !important;
+}
+
+toolbarbutton[disabled="true"],
+.toolbarbutton-1[disabled="true"],
+#PersonalToolbar .bookmark-item[disabled="true"] {
+  color: var(--theme-fg-muted) !important;
+  opacity: 0.55 !important;
+}
+
+#PersonalToolbar,
+#PlacesToolbarItems,
+#personal-bookmarks {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+#PersonalToolbar .bookmark-item {
+  background-color: transparent !important;
+  color: var(--theme-fg) !important;
+}
+
+#zen-overflow-extensions-list .unified-extensions-item-action-button {
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+}
+
+#zen-overflow-extensions-list .unified-extensions-item-action-button:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+
+#zen-sidebar-top-buttons,
+#zen-sidebar-top-buttons-customization-target,
+#zen-tabs-wrapper,
+#zen-tabbox-wrapper,
+#sidebar-box,
+#sidebar-header,
+sidebarheader,
+#sidebar,
+.sidebar-panel {
+  background: var(--theme-bg-subtle) !important;
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-bg-deep) !important;
+}
+
+#sidebar-box {
+  box-shadow: none !important;
+}
+
+#sidebar-header,
+sidebarheader {
+  border-bottom: 1px solid var(--theme-border) !important;
+}
+
+#sidebar-switcher-target,
+#sidebar-close,
+#sidebarMenu-popup toolbarbutton,
+#sidebarMenu-popup menuitem {
+  color: var(--theme-fg) !important;
+  fill: currentColor !important;
+}
+
+#zen-sidebar-top-buttons toolbarbutton,
+#zen-sidebar-top-buttons .toolbarbutton-1,
+#zen-sidebar-top-buttons image,
+#zen-sidebar-top-buttons .toolbarbutton-icon,
+.zen-current-workspace-indicator-name,
+.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > image:nth-child(2),
+.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > label:nth-child(3) {
+  color: var(--theme-info) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+#zen-create-new-button,
+#downloads-button {
+  --sidebar-footer-button-color: var(--theme-info);
+  --toolbarbutton-icon-fill: var(--sidebar-footer-button-color) !important;
+  --toolbarbutton-icon-fill-attention: var(--sidebar-footer-button-color) !important;
+  color: var(--sidebar-footer-button-color) !important;
+  fill: var(--sidebar-footer-button-color) !important;
+  fill-opacity: 1 !important;
+  stroke: var(--sidebar-footer-button-color) !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+#zen-create-new-button:hover,
+#downloads-button:hover {
+  --sidebar-footer-button-color: var(--theme-info);
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--sidebar-footer-button-color) !important;
+}
+
+#zen-create-new-button:is([open="true"], [checked="true"]),
+#downloads-button:is([open="true"], [checked="true"]) {
+  --sidebar-footer-button-color: var(--theme-accent);
+  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
+  color: var(--sidebar-footer-button-color) !important;
+}
+
+#zen-create-new-button > image.toolbarbutton-icon,
+#zen-create-new-button > .toolbarbutton-icon,
+#downloads-button > image.toolbarbutton-icon,
+#downloads-button > .toolbarbutton-icon,
+#downloads-button .toolbarbutton-animatable-image,
+#downloads-button #downloads-indicator-icon,
+#downloads-button #downloads-indicator-progress-icon,
+#downloads-button #downloads-indicator-start-image,
+#downloads-button #downloads-indicator-finish-image {
+  --toolbarbutton-icon-fill: var(--sidebar-footer-button-color) !important;
+  --toolbarbutton-icon-fill-attention: var(--sidebar-footer-button-color) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+  color: var(--sidebar-footer-button-color) !important;
+  fill: var(--sidebar-footer-button-color) !important;
+  fill-opacity: 1 !important;
+  stroke: var(--sidebar-footer-button-color) !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+#zen-create-new-button > .toolbarbutton-text,
+#downloads-button > .toolbarbutton-text,
+#zen-create-new-button > .toolbarbutton-badge-stack,
+#downloads-button > .toolbarbutton-badge-stack {
+  color: var(--sidebar-footer-button-color) !important;
+}
+
+#sidebar-search-container,
+#search-box,
+.search-box {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-border) !important;
+}
+
+#sidebar-splitter {
+  background-color: var(--theme-bg-deep) !important;
+  border-color: var(--theme-bg-deep) !important;
+  opacity: 1 !important;
+}
+
+#toolbar-menubar {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+
+#urlbar,
+#urlbar-container,
+#searchbar,
+.urlbar-input-container,
+.urlbar-input-box,
+.urlbar-input {
+  color: var(--theme-fg) !important;
+}
+
+.urlbar {
+  --urlbarView-separator-color: var(--theme-border) !important;
+  --urlbarView-background: color-mix(in srgb, var(--theme-bg-selected) 30%, var(--theme-bg) 70%) !important;
+  --urlbarView-hover-background: color-mix(in srgb, var(--theme-bg-selected) 75%, var(--theme-bg) 25%) !important;
+  --urlbarView-highlight-background: color-mix(in srgb, var(--theme-bg-selected) 70%, var(--theme-border-strong) 30%) !important;
+  --urlbarView-results-padding: 0 !important;
+}
+
+@keyframes theme-urlbar-floating-expand {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.08);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+@keyframes theme-urlbar-panel-expand {
+  from {
+    opacity: 0;
+    transform: scaleX(0.08);
+  }
+
+  72% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+#urlbar[open][breakout-extend="true"] {
+  animation: theme-urlbar-panel-expand 0.46s cubic-bezier(0.23, 1, 0.32, 1) both !important;
+  transform-origin: center center !important;
+  will-change: transform, opacity !important;
+}
+
+#urlbar[open][zen-floating-urlbar="true"] {
+  animation: theme-urlbar-floating-expand 0.46s cubic-bezier(0.23, 1, 0.32, 1) both !important;
+  transform-origin: center center !important;
+  translate: none !important;
+  will-change: transform, opacity !important;
+}
+
+.urlbar-background,
+#searchbar {
+  background: var(--theme-bg-subtle) !important;
+  background-color: var(--theme-bg-subtle) !important;
+  border: 1px solid var(--theme-border) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#urlbar:not([breakout-extend="true"]):hover .urlbar-background,
+#searchbar:hover {
+  background-color: var(--theme-bg-selected) !important;
+  border-color: var(--theme-border-strong) !important;
+}
+
+#urlbar[focused="true"] > .urlbar-background,
+#urlbar[open="true"] > .urlbar-background,
+#searchbar:focus-within {
+  background-color: var(--theme-bg) !important;
+  border-color: var(--theme-accent) !important;
+  box-shadow: 0 0 0 1px var(--theme-accent) !important;
+}
+
+#urlbar[open="true"] > .urlbar-background {
+  background-color: var(--urlbarView-background) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#urlbar[open="true"] .urlbar-input-container {
+  background-color: var(--theme-bg) !important;
+  border: 1px solid var(--theme-border-strong) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+#urlbar-input::placeholder,
+.urlbar-input::placeholder,
+#searchbar input::placeholder {
+  color: var(--theme-fg-muted) !important;
+  opacity: 1 !important;
+}
+
+.urlbarView,
+#urlbar-results,
+.search-one-offs {
+  background-color: var(--urlbarView-background) !important;
+  color: var(--theme-fg) !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.urlbarView,
+.urlbarView-body-outer,
+.urlbarView-body-inner,
+#urlbar-results {
+  box-sizing: border-box !important;
+  inline-size: 100% !important;
+  max-inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  overflow-x: clip !important;
+}
+
+.urlbarView-body-outer,
+.urlbarView-body-inner,
+.urlbarView-results,
+.urlbarView-row-inner {
+  background-color: transparent !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+}
+
+.urlbarView-body-inner {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: clip !important;
+}
+
+.urlbarView-body-inner::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  border: 1px solid var(--theme-border-strong) !important;
+  border-top: 0 !important;
+  z-index: 2147483647 !important;
+}
+
+.urlbarView-row {
+  color: var(--theme-fg) !important;
+  background-color: transparent !important;
+}
+
+.urlbarView-row + .urlbarView-row {
+  border-top: 1px solid color-mix(in srgb, var(--theme-border-strong) 32%, transparent) !important;
+}
+
+.urlbarView-row:hover {
+  background-color: var(--urlbarView-hover-background) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+.urlbarView-row[selected] {
+  background-color: var(--urlbarView-highlight-background) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+#urlbar .urlbarView-row:is(:hover, [selected]) .urlbarView-favicon,
+#urlbar .urlbarView-row:is(:hover, [selected]) .urlbarView-favicon img,
+#urlbar .urlbarView-row:is(:hover, [selected]) .urlbarView-shortcutContent {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--theme-info) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+#urlbar .urlbarView-row:is(:hover, [selected]) :is(
+  .urlbarView-button,
+  .urlbarView-button-menu,
+  .urlbarView-action-button,
+  .urlbarView-row-button,
+  button
+) {
+  appearance: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--theme-fg-strong) !important;
+  fill: currentColor !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 6px color-mix(in srgb, var(--theme-info) 45%, transparent) !important;
+}
+
+#urlbar .urlbarView-row:is(:hover, [selected]) :is(
+  .urlbarView-button,
+  .urlbarView-button-menu,
+  .urlbarView-action-button,
+  .urlbarView-row-button,
+  button
+):is(:hover, :focus-visible, [open]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--theme-info) !important;
+}
+
+.urlbarView-title,
+.urlbarView-url,
+.urlbarView-tags,
+.urlbarView-action {
+  color: var(--theme-fg) !important;
+}
+
+.urlbarView-url,
+.urlbarView-action {
+  color: var(--theme-info) !important;
+}
+
+#identity-icon-box,
+#identity-permission-box,
+#tracking-protection-icon-container,
+.urlbar-page-action {
+  color: var(--theme-fg-muted) !important;
+  fill: currentColor !important;
+}
+
+#identity-icon-box:hover,
+#identity-permission-box:hover,
+#tracking-protection-icon-container:hover,
+.urlbar-page-action:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+
+
+#navigator-toolbox {
+    background: var(--theme-bg) !important;
+    background-color: var(--theme-bg) !important;
+    color: var(--theme-fg) !important;
+}
+
+
+/*
++------------------------------------------------+-------------+
+| class/ID                                       | Occurrences |
++------------------------------------------------+-------------+
+| #navigator-toolbox                             |          23 |
+| #urlbar                                        |          19 |
+| #TabsToolbar                                   |          14 |
+| #downloads-button                              |          13 |
+| .toolbarbutton-1                               |          11 |
+| .urlbarView-row                                |          10 |
+| .toolbarbutton-icon                            |           8 |
+| .subviewbutton                                 |           8 |
+| #zen-create-new-button                         |           8 |
+| #zen-sidebar-top-buttons                       |           7 |
+| #PersonalToolbar                               |           6 |
+| .urlbar-background                             |           5 |
+| .tabbrowser-tab                                |           5 |
+| #searchbar                                     |           5 |
+| .urlbarView-body-inner                         |           4 |
+| .toolbarbutton-text                            |           4 |
+| .toolbarbutton-badge-stack                     |           4 |
+| .bookmark-item                                 |           4 |
+| .PanelUI-subView                               |           4 |
+| #urlbar-container                              |           4 |
+| #nav-bar                                       |           4 |
+| .zen-browser-generic-background                |           3 |
+| .tab-background                                |           3 |
+| .panel-header                                  |           3 |
+| #zen-tabbox-wrapper                            |           3 |
+| #titlebar                                      |           3 |
+| #nav-bar-customization-target                  |           3 |
+| .zen-workspace-normal-tabs-section             |           2 |
+| .zen-current-workspace-indicator-name          |           2 |
+| .view                                          |           2 |
+| .urlbarView-url                                |           2 |
+| .urlbarView-row-button                         |           2 |
+| .urlbarView-favicon                            |           2 |
+| .urlbarView-button-menu                        |           2 |
+| .urlbarView-button                             |           2 |
+| .urlbarView-body-outer                         |           2 |
+| .urlbarView-action-button                      |           2 |
+| .urlbarView-action                             |           2 |
+| .urlbarView                                    |           2 |
+| .urlbar-page-action                            |           2 |
+| .urlbar-input-container                        |           2 |
+| .urlbar-input                                  |           2 |
+| .unified-extensions-item-action-button         |           2 |
+| .panel-subview-footer-button                   |           2 |
+| #zen-tabs-wrapper                              |           2 |
+| #zen-sidebar-top-buttons-customization-target  |           2 |
+| #zen-overflow-extensions-list                  |           2 |
+| #zen-main-app-wrapper                          |           2 |
+| #zen-appcontent-wrapper                        |           2 |
+| #zen-appcontent-navbar-container               |           2 |
+| #urlbar-results                                |           2 |
+| #tracking-protection-icon-container            |           2 |
+| #tabbrowser-tabpanels                          |           2 |
+| #sidebarMenu-popup                             |           2 |
+| #sidebar-header                                |           2 |
+| #sidebar-box                                   |           2 |
+| #identity-permission-box                       |           2 |
+| #identity-icon-box                             |           2 |
+| #feature-callout                               |           2 |
+| .zen-workspace-close-unpinned-tabs-button      |           1 |
+| .zen-current-workspace-indicator               |           1 |
+| .use-single-toolbar                            |           1 |
+| .urlbarView-title                              |           1 |
+| .urlbarView-tags                               |           1 |
+| .urlbarView-shortcutContent                    |           1 |
+| .urlbarView-row-inner                          |           1 |
+| .urlbarView-results                            |           1 |
+| .urlbar-input-box                              |           1 |
+| .urlbar                                        |           1 |
+| .toolbarseparator                              |           1 |
+| .toolbarbutton-animatable-image                |           1 |
+| .titlebar-buttonbox-container                  |           1 |
+| .titlebar-buttonbox                            |           1 |
+| .tab-throbber                                  |           1 |
+| .tab-stack                                     |           1 |
+| .tab-secondary-label                           |           1 |
+| .tab-label-container                           |           1 |
+| .tab-icon-sound-label                          |           1 |
+| .tab-icon-overlay                              |           1 |
+| .tab-icon-image                                |           1 |
+| .tab-content                                   |           1 |
+| .tab-close-button                              |           1 |
+| .sidebar-panel                                 |           1 |
+| .search-one-offs                               |           1 |
+| .search-box                                    |           1 |
+| .pinned-tabs-container-separator               |           1 |
+| .panel-viewstack                               |           1 |
+| .panel-subview-header                          |           1 |
+| .panel-subview-body                            |           1 |
+| .panel-separator                               |           1 |
+| .panel-arrowcontent                            |           1 |
+| .hide-tabbar                                   |           1 |
+| .compact                                       |           1 |
+| .browserContainer                              |           1 |
+| #zen-sidebar-splitter                          |           1 |
+| #zen-browser-background                        |           1 |
+| #zen-appcontent-navbar-wrapper                 |           1 |
+| #vertical-tabs                                 |           1 |
+| #urlbar-input                                  |           1 |
+| #toolbar-menubar                               |           1 |
+| #titlebar-buttonbox-container                  |           1 |
+| #tabbrowser-tabs                               |           1 |
+| #tabbrowser-tabbox                             |           1 |
+| #tabbrowser-arrowscrollbox-periphery           |           1 |
+| #sidebar-switcher-target                       |           1 |
+| #sidebar-splitter                              |           1 |
+| #sidebar-search-container                      |           1 |
+| #sidebar-close                                 |           1 |
+| #sidebar                                       |           1 |
+| #search-box                                    |           1 |
+| #personal-bookmarks                            |           1 |
+| #nav-bar-overflow-button                       |           1 |
+| #main-window                                   |           1 |
+| #downloads-indicator-start-image               |           1 |
+| #downloads-indicator-progress-icon             |           1 |
+| #downloads-indicator-icon                      |           1 |
+| #downloads-indicator-finish-image              |           1 |
+| #browser                                       |           1 |
+| #appcontent                                    |           1 |
+| #PlacesToolbarItems                            |           1 |
++------------------------------------------------+-------------+
+*/
