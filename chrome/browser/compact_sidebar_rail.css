@@ -270,9 +270,15 @@
     border-radius: var(--theme-compact-floating-button-radius) !important;
   }
 
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) {
+    outline: 1px solid var(--theme-accent) !important;
+    outline-color: var(--theme-accent) !important;
+    outline-offset: -1px !important;
+  }
+
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) .tab-background {
-    background-color: var(--theme-bg-selected) !important;
-    border-color: transparent !important;
+    background-color: var(--theme-accent-alt) !important;
+    border-color: var(--theme-accent) !important;
     box-shadow: none !important;
   }
 }
