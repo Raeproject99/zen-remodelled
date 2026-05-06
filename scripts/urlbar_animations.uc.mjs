@@ -31,6 +31,32 @@ const createStyle = () => {
       z-index: 2147483647 !important;
     }
 
+    .zen-remodelled-urlbar-focus-layer {
+      backdrop-filter: blur(2px) saturate(0.88) !important;
+      background: color-mix(in srgb, var(--theme-bg) 26%, transparent) !important;
+      block-size: 100vh !important;
+      inline-size: 100vw !important;
+      inset: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      position: fixed !important;
+      transition: opacity 0.18s ease !important;
+      z-index: 2147483000 !important;
+    }
+
+    .zen-remodelled-urlbar-focus-layer[active] {
+      opacity: 1 !important;
+      transition-duration: 0.24s !important;
+    }
+
+    #urlbar[open] {
+      z-index: 2147483646 !important;
+    }
+
+    #urlbar[open]:not([zen-floating-urlbar="true"]) {
+      position: relative !important;
+    }
+
     .zen-remodelled-urlbar-close-shell > .zen-remodelled-urlbar-close-snapshot,
     .zen-remodelled-urlbar-close-shell > .zen-remodelled-urlbar-close-copy {
       animation: none !important;
@@ -71,6 +97,7 @@ const start = () => {
 
   const style = createStyle();
   const clones = new Set();
+  const focusLayer = document.createElementNS(HTML_NS, "div");
   let wasOpen = urlbar.hasAttribute("open");
   let lastRect = null;
   let lastSnapshot = null;
@@ -80,6 +107,14 @@ const start = () => {
   const clearCaptureTimers = () => {
     captureTimers.forEach((timer) => window.clearTimeout(timer));
     captureTimers = [];
+  };
+
+  focusLayer.className = "zen-remodelled-urlbar-focus-layer";
+  focusLayer.setAttribute("aria-hidden", "true");
+  document.documentElement.appendChild(focusLayer);
+
+  const syncFocusLayer = (isOpen) => {
+    focusLayer.toggleAttribute("active", isOpen);
   };
 
   const cloneOpenUrlbar = (rect) => {
@@ -194,8 +229,10 @@ const start = () => {
     const isOpen = urlbar.hasAttribute("open");
 
     if (isOpen) {
+      syncFocusLayer(true);
       scheduleOpeningCaptures();
     } else if (wasOpen) {
+      syncFocusLayer(false);
       clearCaptureTimers();
       animateClosedUrlbar();
     }
@@ -228,6 +265,7 @@ const start = () => {
   urlbar.addEventListener("input", inputListener, true);
 
   if (wasOpen) {
+    syncFocusLayer(true);
     scheduleOpeningCaptures();
   }
 
@@ -240,6 +278,7 @@ const start = () => {
     captureObserver.disconnect();
     urlbar.removeEventListener("input", inputListener, true);
     style.remove();
+    focusLayer.remove();
     clones.forEach((clone) => clone.remove());
     clones.clear();
     delete window[cleanupKey];
