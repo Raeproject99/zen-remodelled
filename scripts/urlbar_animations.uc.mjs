@@ -23,7 +23,7 @@ const createStyle = () => {
   style.id = STYLE_ID;
   style.textContent = `
     .zen-remodelled-urlbar-close-shell {
-      animation: zen-remodelled-urlbar-close 0.24s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+      animation: zen-remodelled-urlbar-close 0.46s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
       overflow: hidden !important;
       pointer-events: none !important;
       position: fixed !important;
@@ -31,9 +31,11 @@ const createStyle = () => {
       z-index: 2147483647 !important;
     }
 
+    .zen-remodelled-urlbar-close-shell > .zen-remodelled-urlbar-close-snapshot,
     .zen-remodelled-urlbar-close-shell > .zen-remodelled-urlbar-close-copy {
       animation: none !important;
       block-size: 100% !important;
+      display: block !important;
       inline-size: 100% !important;
       margin: 0 !important;
       max-inline-size: none !important;
@@ -71,24 +73,16 @@ const start = () => {
   const clones = new Set();
   let wasOpen = urlbar.hasAttribute("open");
   let lastRect = null;
-  let lastClone = null;
+  let lastSnapshot = null;
   let captureTimers = [];
+  let captureFrame = 0;
 
   const clearCaptureTimers = () => {
     captureTimers.forEach((timer) => window.clearTimeout(timer));
     captureTimers = [];
   };
 
-  const captureOpenUrlbar = () => {
-    if (!urlbar.hasAttribute("open")) {
-      return;
-    }
-
-    const rect = urlbar.getBoundingClientRect();
-    if (rect.width < 16 || rect.height < 16) {
-      return;
-    }
-
+  const cloneOpenUrlbar = (rect) => {
     const clone = urlbar.cloneNode(true);
     const sourceInput = urlbar.querySelector("#urlbar-input, .urlbar-input");
     const cloneInput = clone.querySelector("#urlbar-input, .urlbar-input");
@@ -110,14 +104,63 @@ const start = () => {
     setImportant(clone, "transform", "none");
     setImportant(clone, "translate", "none");
 
+    return clone;
+  };
+
+  const snapshotOpenUrlbar = (rect) => {
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const canvas = document.createElementNS(HTML_NS, "canvas");
+    const context = canvas.getContext("2d");
+
+    if (!context || typeof context.drawWindow !== "function") {
+      return cloneOpenUrlbar(rect);
+    }
+
+    canvas.className = "zen-remodelled-urlbar-close-snapshot";
+    canvas.setAttribute("aria-hidden", "true");
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+    setImportant(canvas, "block-size", `${rect.height}px`);
+    setImportant(canvas, "inline-size", `${rect.width}px`);
+
+    try {
+      context.scale(dpr, dpr);
+      context.drawWindow(window, rect.left, rect.top, rect.width, rect.height, "rgba(0, 0, 0, 0)");
+    } catch {
+      return cloneOpenUrlbar(rect);
+    }
+
+    return canvas;
+  };
+
+  const captureOpenUrlbar = () => {
+    captureFrame = 0;
+
+    if (!urlbar.hasAttribute("open")) {
+      return;
+    }
+
+    const rect = urlbar.getBoundingClientRect();
+    if (rect.width < 16 || rect.height < 16) {
+      return;
+    }
+
     lastRect = rect;
-    lastClone = clone;
+    lastSnapshot = snapshotOpenUrlbar(rect);
   };
 
   const scheduleCapture = () => {
+    if (!urlbar.hasAttribute("open") || captureFrame) {
+      return;
+    }
+
+    captureFrame = window.requestAnimationFrame(captureOpenUrlbar);
+  };
+
+  const scheduleOpeningCaptures = () => {
     clearCaptureTimers();
-    window.requestAnimationFrame(captureOpenUrlbar);
-    captureTimers = [80, 180, 320, 500].map((delay) => window.setTimeout(captureOpenUrlbar, delay));
+    scheduleCapture();
+    captureTimers = [80, 180, 320, 500].map((delay) => window.setTimeout(scheduleCapture, delay));
   };
 
   const removeClone = (shell) => {
@@ -126,13 +169,14 @@ const start = () => {
   };
 
   const animateClosedUrlbar = () => {
-    if (!lastRect || !lastClone || lastRect.width < 16 || lastRect.height < 16) {
+    if (!lastRect || !lastSnapshot || lastRect.width < 16 || lastRect.height < 16) {
       return;
     }
 
     const shell = document.createElementNS(HTML_NS, "div");
     shell.className = "zen-remodelled-urlbar-close-shell";
-    shell.appendChild(lastClone.cloneNode(true));
+    shell.appendChild(lastSnapshot);
+    lastSnapshot = null;
 
     setImportant(shell, "block-size", `${lastRect.height}px`);
     setImportant(shell, "inline-size", `${lastRect.width}px`);
@@ -143,14 +187,14 @@ const start = () => {
     document.documentElement.appendChild(shell);
 
     shell.addEventListener("animationend", () => removeClone(shell), { once: true });
-    window.setTimeout(() => removeClone(shell), 360);
+    window.setTimeout(() => removeClone(shell), 620);
   };
 
   const observer = new MutationObserver(() => {
     const isOpen = urlbar.hasAttribute("open");
 
     if (isOpen) {
-      scheduleCapture();
+      scheduleOpeningCaptures();
     } else if (wasOpen) {
       clearCaptureTimers();
       animateClosedUrlbar();
@@ -164,13 +208,37 @@ const start = () => {
     attributes: true
   });
 
-  if (wasOpen) {
+  const captureObserver = new MutationObserver(() => {
     scheduleCapture();
+  });
+
+  captureObserver.observe(urlbar, {
+    attributes: true,
+    characterData: true,
+    childList: true,
+    subtree: true
+  });
+
+  const inputListener = (event) => {
+    if (event.target.closest?.("#urlbar")) {
+      scheduleCapture();
+    }
+  };
+
+  urlbar.addEventListener("input", inputListener, true);
+
+  if (wasOpen) {
+    scheduleOpeningCaptures();
   }
 
   const cleanup = () => {
     clearCaptureTimers();
+    if (captureFrame) {
+      window.cancelAnimationFrame(captureFrame);
+    }
     observer.disconnect();
+    captureObserver.disconnect();
+    urlbar.removeEventListener("input", inputListener, true);
     style.remove();
     clones.forEach((clone) => clone.remove());
     clones.clear();
