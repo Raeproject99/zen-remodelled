@@ -59,13 +59,14 @@ const createStyle = () => {
       position: absolute !important;
     }
 
-    .zen-remodelled-urlbar-focus-snapshot {
-      block-size: 100% !important;
-      display: block !important;
+    .zen-remodelled-urlbar-main-focus-target {
+      transition: filter 0.18s ease !important;
+      will-change: filter !important;
+    }
+
+    .zen-remodelled-urlbar-main-focus-target[zen-remodelled-focus-active] {
       filter: blur(8px) saturate(0.72) brightness(0.82) !important;
-      inline-size: 100% !important;
-      transform: scale(1.025) !important;
-      transform-origin: center center !important;
+      transition-duration: 0.24s !important;
     }
 
     #urlbar[open] {
@@ -117,9 +118,9 @@ const start = () => {
   const style = createStyle();
   const clones = new Set();
   const focusLayers = {
-    main: document.createElementNS(HTML_NS, "div"),
     sidebar: document.createElementNS(HTML_NS, "div")
   };
+  const mainFocusTargets = new Set();
   let wasOpen = urlbar.hasAttribute("open");
   let lastRect = null;
   let lastSnapshot = null;
@@ -211,32 +212,42 @@ const start = () => {
     setImportant(layer, "width", "0");
   };
 
-  const createFocusSnapshot = (rect) => {
-    const dpr = Math.max(1, window.devicePixelRatio || 1);
-    const canvas = document.createElementNS(HTML_NS, "canvas");
-    const context = canvas.getContext("2d");
+  const cleanupInactiveMainFocusTargets = () => {
+    mainFocusTargets.forEach((target) => {
+      if (!target.hasAttribute("zen-remodelled-focus-active")) {
+        target.classList.remove("zen-remodelled-urlbar-main-focus-target");
+        mainFocusTargets.delete(target);
+      }
+    });
+  };
 
-    if (!context || typeof context.drawWindow !== "function") {
-      return null;
+  const setMainFocusTarget = () => {
+    const target = findFocusLayerTarget("main");
+    mainFocusTargets.forEach((candidate) => {
+      if (candidate !== target) {
+        candidate.removeAttribute("zen-remodelled-focus-active");
+      }
+    });
+
+    if (!target) {
+      return;
     }
 
-    canvas.className = "zen-remodelled-urlbar-focus-snapshot";
-    canvas.setAttribute("aria-hidden", "true");
-    canvas.width = Math.max(1, Math.round(rect.width * dpr));
-    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+    target.classList.add("zen-remodelled-urlbar-main-focus-target");
+    target.setAttribute("zen-remodelled-focus-active", "true");
+    mainFocusTargets.add(target);
+  };
 
-    try {
-      context.scale(dpr, dpr);
-      context.drawWindow(window, rect.left, rect.top, rect.width, rect.height, "rgba(0, 0, 0, 0)");
-    } catch {
-      return null;
+  const clearMainFocusTarget = (immediate = false) => {
+    mainFocusTargets.forEach((target) => target.removeAttribute("zen-remodelled-focus-active"));
+    if (immediate) {
+      cleanupInactiveMainFocusTargets();
     }
-
-    return canvas;
   };
 
   const prepareFocusLayers = () => {
     window.clearTimeout(focusLayerCleanupTimer);
+    setMainFocusTarget();
 
     Object.entries(focusLayers).forEach(([name, layer]) => {
       layer.removeAttribute("active");
@@ -253,10 +264,6 @@ const start = () => {
       }
 
       setFocusLayerRect(layer, rect);
-      const snapshot = createFocusSnapshot(rect);
-      if (snapshot) {
-        layer.appendChild(snapshot);
-      }
       layer.setAttribute("prepared", "true");
     });
   };
@@ -275,13 +282,17 @@ const start = () => {
     });
 
     const cleanup = () => Object.values(focusLayers).forEach(clearFocusLayerRect);
+    clearMainFocusTarget(immediate);
 
     if (immediate) {
       cleanup();
       return;
     }
 
-    focusLayerCleanupTimer = window.setTimeout(cleanup, 260);
+    focusLayerCleanupTimer = window.setTimeout(() => {
+      cleanup();
+      cleanupInactiveMainFocusTargets();
+    }, 260);
   };
 
   const syncFocusLayer = (isOpen) => {

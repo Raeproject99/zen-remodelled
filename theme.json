@@ -4,7 +4,7 @@
   "description": "Tokyo Night Dark Base24 theme for Zen Browser.",
   "homepage": "https://github.com/Raeproject99/zen-remodelled",
   "author": "Raeproject99",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "style": {
     "chrome": "chrome/userChrome.css",
     "content": "chrome/userContent.css"
