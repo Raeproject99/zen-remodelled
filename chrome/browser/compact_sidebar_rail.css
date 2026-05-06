@@ -41,6 +41,10 @@
     transition: none !important;
   }
 
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]):has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]) {
+    overflow: visible !important;
+  }
+
   :root[zen-compact-mode="true"]:not([zen-right-side="true"]):not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
     left: var(--theme-compact-floating-bar-gutter) !important;
     right: auto !important;
@@ -76,7 +80,6 @@
     #titlebar-buttonbox-container,
     .titlebar-buttonbox-container,
     #nav-bar-overflow-button,
-    #nav-bar,
     #downloads-button,
     #zen-create-new-button,
     #tabbrowser-arrowscrollbox-periphery,
@@ -93,6 +96,77 @@
     padding: 0 !important;
     opacity: 0 !important;
     pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #nav-bar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #titlebar:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]),
+    #nav-bar:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]),
+    #nav-bar-customization-target:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"]),
+    #urlbar-container:has(#urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"])
+  ) {
+    overflow: visible !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #nav-bar-customization-target {
+    display: flex !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #nav-bar-customization-target > *:not(#urlbar-container) {
+    display: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #urlbar-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #urlbar:is([open], [focused="true"], [breakout-extend="true"])[zen-floating-urlbar="true"] {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
@@ -114,8 +188,8 @@
   }
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
-    toolbarbutton,
-    .toolbarbutton-1,
+    #TabsToolbar toolbarbutton,
+    #TabsToolbar .toolbarbutton-1,
     .tabbrowser-tab
   ) {
     width: var(--theme-compact-floating-button-size) !important;
@@ -137,8 +211,8 @@
   }
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
-    toolbarbutton:hover,
-    .toolbarbutton-1:hover,
+    #TabsToolbar toolbarbutton:hover,
+    #TabsToolbar .toolbarbutton-1:hover,
     .tabbrowser-tab:hover .tab-background
   ) {
     background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
@@ -146,19 +220,19 @@
   }
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
-    toolbarbutton[open="true"],
-    toolbarbutton[checked="true"],
-    .toolbarbutton-1[open="true"],
-    .toolbarbutton-1[checked="true"]
+    #TabsToolbar toolbarbutton[open="true"],
+    #TabsToolbar toolbarbutton[checked="true"],
+    #TabsToolbar .toolbarbutton-1[open="true"],
+    #TabsToolbar .toolbarbutton-1[checked="true"]
   ) {
     background-color: var(--theme-bg-selected) !important;
     color: var(--theme-info) !important;
   }
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
-    .toolbarbutton-icon,
-    image.toolbarbutton-icon,
-    .toolbarbutton-badge-stack,
+    #TabsToolbar .toolbarbutton-icon,
+    #TabsToolbar image.toolbarbutton-icon,
+    #TabsToolbar .toolbarbutton-badge-stack,
     .tab-icon-image,
     .tab-throbber,
     .tab-icon-overlay
@@ -177,7 +251,7 @@
   }
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
-    .toolbarbutton-text,
+    #TabsToolbar .toolbarbutton-text,
     .tab-label-container,
     .tab-secondary-label,
     .tab-close-button,
