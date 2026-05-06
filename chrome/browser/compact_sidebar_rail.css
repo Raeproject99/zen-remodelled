@@ -1,50 +1,57 @@
 @media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) {
-    --theme-compact-rail-width: 68px !important;
-    --theme-compact-rail-gutter: 12px !important;
-    --theme-compact-rail-radius: 12px !important;
-    --theme-compact-rail-padding: 7px !important;
-    --theme-compact-rail-button-size: 42px !important;
-    --theme-compact-rail-button-radius: 8px !important;
-    --theme-compact-rail-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, black) !important;
-    --theme-compact-rail-border: color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
+    --theme-compact-floating-bar-width: 68px !important;
+    --theme-compact-floating-bar-height: 400px !important;
+    --theme-compact-floating-bar-gutter: 12px !important;
+    --theme-compact-floating-bar-radius: 12px !important;
+    --theme-compact-floating-bar-padding: 7px !important;
+    --theme-compact-floating-button-size: 42px !important;
+    --theme-compact-floating-button-radius: 8px !important;
+    --theme-compact-floating-bg: color-mix(in srgb, var(--theme-bg-deep) 94%, black) !important;
+    --theme-compact-floating-border: color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
-    --zen-toolbox-max-width: var(--theme-compact-rail-width) !important;
-    --zen-navigation-toolbar-min-width: var(--theme-compact-rail-width) !important;
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
+    --zen-toolbox-max-width: var(--theme-compact-floating-bar-width) !important;
+    --zen-navigation-toolbar-min-width: var(--theme-compact-floating-bar-width) !important;
 
     position: fixed !important;
     z-index: 10 !important;
-    top: var(--theme-compact-rail-gutter) !important;
-    bottom: var(--theme-compact-rail-gutter) !important;
-    width: var(--theme-compact-rail-width) !important;
-    min-width: var(--theme-compact-rail-width) !important;
-    max-width: var(--theme-compact-rail-width) !important;
-    height: auto !important;
-    margin: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: var(--theme-compact-floating-bar-width) !important;
+    min-width: var(--theme-compact-floating-bar-width) !important;
+    max-width: var(--theme-compact-floating-bar-width) !important;
+    height: min(
+      var(--theme-compact-floating-bar-height),
+      calc(100vh - var(--theme-compact-floating-bar-gutter) * 2)
+    ) !important;
+    min-height: 0 !important;
+    max-height: calc(100vh - var(--theme-compact-floating-bar-gutter) * 2) !important;
+    margin-block: auto !important;
+    margin-inline: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     overflow: clip !important;
-    background: var(--theme-compact-rail-bg) !important;
-    background-color: var(--theme-compact-rail-bg) !important;
-    border: 1px solid var(--theme-compact-rail-border) !important;
-    border-radius: var(--theme-compact-rail-radius) !important;
+    background: var(--theme-compact-floating-bg) !important;
+    background-color: var(--theme-compact-floating-bg) !important;
+    border: 1px solid var(--theme-compact-floating-border) !important;
+    border-radius: var(--theme-compact-floating-bar-radius) !important;
     box-shadow: 0 10px 26px color-mix(in srgb, black 36%, transparent) !important;
     transition: none !important;
   }
 
-  :root[zen-compact-mode="true"]:not([zen-right-side="true"]):not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
-    left: var(--theme-compact-rail-gutter) !important;
+  :root[zen-compact-mode="true"]:not([zen-right-side="true"]):not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
+    left: var(--theme-compact-floating-bar-gutter) !important;
     right: auto !important;
   }
 
-  :root[zen-compact-mode="true"][zen-right-side="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
-    right: var(--theme-compact-rail-gutter) !important;
+  :root[zen-compact-mode="true"][zen-right-side="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) {
+    right: var(--theme-compact-floating-bar-gutter) !important;
     left: auto !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) #titlebar {
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) #titlebar {
     visibility: visible !important;
     opacity: 1 !important;
     position: relative !important;
@@ -52,8 +59,10 @@
     min-width: 0 !important;
     max-width: 100% !important;
     height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
     margin: 0 !important;
-    padding: var(--theme-compact-rail-padding) 0 !important;
+    padding: var(--theme-compact-floating-bar-padding) 0 !important;
     box-sizing: border-box !important;
     overflow: clip !important;
     background: transparent !important;
@@ -61,19 +70,42 @@
     transition: none !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    #zen-sidebar-top-buttons,
+    #zen-sidebar-top-buttons-customization-target,
+    #titlebar-buttonbox-container,
+    .titlebar-buttonbox-container,
+    #nav-bar-overflow-button,
+    #nav-bar,
+    #downloads-button,
+    #zen-create-new-button,
+    #tabbrowser-arrowscrollbox-periphery,
+    .zen-current-workspace-indicator,
+    .zen-workspace-close-unpinned-tabs-button,
+    .pinned-tabs-container-separator
+  ) {
+    display: none !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
     #TabsToolbar,
     #tabbrowser-tabs,
     #vertical-tabs,
     #zen-tabs-wrapper,
-    #zen-tabbox-wrapper,
-    #zen-sidebar-top-buttons,
-    #zen-sidebar-top-buttons-customization-target,
-    #zen-sidebar-foot-buttons
+    #zen-tabbox-wrapper
   ) {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    min-height: 0 !important;
     margin-inline: 0 !important;
     background: transparent !important;
     background-color: transparent !important;
@@ -81,25 +113,22 @@
     box-shadow: none !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
-    #zen-sidebar-top-buttons toolbarbutton,
-    #zen-sidebar-top-buttons .toolbarbutton-1,
-    #zen-sidebar-foot-buttons toolbarbutton,
-    #zen-sidebar-foot-buttons .toolbarbutton-1,
-    #TabsToolbar toolbarbutton,
-    #TabsToolbar .toolbarbutton-1
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    toolbarbutton,
+    .toolbarbutton-1,
+    .tabbrowser-tab
   ) {
-    width: var(--theme-compact-rail-button-size) !important;
-    min-width: var(--theme-compact-rail-button-size) !important;
-    max-width: var(--theme-compact-rail-button-size) !important;
-    height: var(--theme-compact-rail-button-size) !important;
-    min-height: var(--theme-compact-rail-button-size) !important;
-    max-height: var(--theme-compact-rail-button-size) !important;
+    width: var(--theme-compact-floating-button-size) !important;
+    min-width: var(--theme-compact-floating-button-size) !important;
+    max-width: var(--theme-compact-floating-button-size) !important;
+    height: var(--theme-compact-floating-button-size) !important;
+    min-height: var(--theme-compact-floating-button-size) !important;
+    max-height: var(--theme-compact-floating-button-size) !important;
     margin: 3px auto !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     border: 0 !important;
-    border-radius: var(--theme-compact-rail-button-radius) !important;
+    border-radius: var(--theme-compact-floating-button-radius) !important;
     background-color: transparent !important;
     color: var(--theme-info) !important;
     fill: currentColor !important;
@@ -107,19 +136,16 @@
     opacity: 1 !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
-    #zen-sidebar-top-buttons toolbarbutton:hover,
-    #zen-sidebar-top-buttons .toolbarbutton-1:hover,
-    #zen-sidebar-foot-buttons toolbarbutton:hover,
-    #zen-sidebar-foot-buttons .toolbarbutton-1:hover,
-    #TabsToolbar toolbarbutton:hover,
-    #TabsToolbar .toolbarbutton-1:hover
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
+    toolbarbutton:hover,
+    .toolbarbutton-1:hover,
+    .tabbrowser-tab:hover .tab-background
   ) {
     background-color: color-mix(in srgb, var(--theme-fg) 12%, transparent) !important;
     color: var(--theme-fg-strong) !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
     toolbarbutton[open="true"],
     toolbarbutton[checked="true"],
     .toolbarbutton-1[open="true"],
@@ -129,11 +155,13 @@
     color: var(--theme-info) !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
     .toolbarbutton-icon,
     image.toolbarbutton-icon,
     .toolbarbutton-badge-stack,
-    #downloads-indicator-icon
+    .tab-icon-image,
+    .tab-throbber,
+    .tab-icon-overlay
   ) {
     width: 20px !important;
     height: 20px !important;
@@ -148,50 +176,29 @@
     filter: none !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) :is(
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) :is(
     .toolbarbutton-text,
     .tab-label-container,
     .tab-secondary-label,
     .tab-close-button,
+    .tab-icon-sound-label,
     .zen-current-workspace-indicator-name
   ) {
     display: none !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .tabbrowser-tab {
-    width: var(--theme-compact-rail-button-size) !important;
-    min-width: var(--theme-compact-rail-button-size) !important;
-    max-width: var(--theme-compact-rail-button-size) !important;
-    min-height: var(--theme-compact-rail-button-size) !important;
-    margin: 3px auto !important;
-    padding: 0 !important;
-  }
-
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .tabbrowser-tab :is(
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab :is(
     .tab-stack,
     .tab-content,
     .tab-background
   ) {
-    min-height: var(--theme-compact-rail-button-size) !important;
-    border-radius: var(--theme-compact-rail-button-radius) !important;
+    min-height: var(--theme-compact-floating-button-size) !important;
+    border-radius: var(--theme-compact-floating-button-radius) !important;
   }
 
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) .tab-background {
+  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[zen-user-show]:not([animate="true"]) .tabbrowser-tab:is([selected="true"], [visuallyselected="true"]) .tab-background {
     background-color: var(--theme-bg-selected) !important;
     border-color: transparent !important;
     box-shadow: none !important;
-  }
-
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) .zen-current-workspace-indicator {
-    width: 52px !important;
-    min-width: 52px !important;
-    max-width: 52px !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    margin: 0 auto 8px !important;
-    border: 1px solid color-mix(in srgb, var(--theme-info) 18%, transparent) !important;
-    border-radius: 999px !important;
-    background-color: color-mix(in srgb, var(--theme-bg-deep) 72%, transparent) !important;
-    color: var(--theme-info) !important;
   }
 }
