@@ -49,6 +49,8 @@ body,
     position: fixed !important;
     z-index: 10 !important;
     padding: 0 var(--zen-compact-float) !important;
+    contain: layout paint !important;
+    overflow: clip !important;
   }
 
   :root[zen-no-padding="true"][zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
@@ -69,6 +71,22 @@ body,
 
   :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
     transition: visibility 0.15s ease !important;
+  }
+
+  :root[zen-compact-mode="false"][zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transition: none !important;
+  }
+
+  :root[zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) :is(
+    #zen-main-app-wrapper,
+    #browser,
+    #zen-appcontent-wrapper,
+    #tabbrowser-tabbox,
+    #tabbrowser-tabpanels
+  ) {
+    overflow-x: clip !important;
   }
 }
 
