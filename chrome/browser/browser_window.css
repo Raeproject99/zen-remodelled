@@ -43,17 +43,6 @@ body,
   border-color: var(--theme-border) !important;
 }
 
-@media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
-  :root[zen-compact-mode="true"][zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #zen-tabbox-wrapper {
-    margin-left: var(--zen-element-separation) !important;
-    margin-right: var(--zen-element-separation) !important;
-  }
-
-  :root[zen-compact-mode="true"][zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #zen-appcontent-wrapper #tabbrowser-tabbox {
-    margin-left: 0 !important;
-  }
-}
-
 #zen-sidebar-splitter,
 splitter {
   background-color: var(--theme-bg-deep) !important;
