@@ -1,0 +1,273 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+@import url('chrome://browser/content/zen-styles/zen-tabs/vertical-tabs.css');
+
+#zen-tabbox-wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+@media -moz-pref('zen.workspaces.hide-default-container-indicator') {
+  .tabbrowser-tab[zenDefaultUserContextId='true'] .tab-context-line {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Single Toolbar Mode - Top Bar Handling (Includes External CSS)
+   ========================================================================== */
+:root[zen-single-toolbar='true']:not([customizing]) {
+  #zen-appcontent-navbar-wrapper {
+    display: flex;
+    -moz-window-dragging: drag; /* Allow dragging the window via this bar */
+    min-height: var(--zen-element-separation);
+    height: var(--zen-element-separation);
+
+    /* Ensure Personal Toolbar takes available width */
+    & #PersonalToolbar {
+      width: -moz-available;
+    }
+
+    /* Include styles for the top bar under certain conditions:
+      * - Bookmarks toolbar is visible OR
+      * - The container is explicitly marked to hide controls (e.g., on Linux with reversed controls)
+      */
+    :root[zen-has-bookmarks] &,
+    &[should-hide='true'] {
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+--zen-toolbar-height: 34px;
+
+height: var(--zen-toolbar-height);
+z-index: 1;
+
+#zen-appcontent-navbar-container {
+  display: flex;
+  min-height: var(--zen-toolbar-height);
+}
+
+@media -moz-pref('zen.view.hide-window-controls') {
+  transition: height var(--zen-hidden-toolbar-transition), opacity var(--zen-hidden-toolbar-transition);
+  transition-delay: 0.2s;
+  overflow: clip;
+
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+& .titlebar-buttonbox-container {
+  max-height: 100%;
+  transition: none;
+}
+
+  &:not([zen-has-hover='true']):not([has-popup-menu]):not([zen-compact-mode-active]) {
+    height: var(--zen-element-separation);
+    opacity: 0;
+    & #zen-appcontent-navbar-container {
+      pointer-events: none;
+    }
+
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+& .titlebar-buttonbox-container {
+  max-height: 0px;
+  /* We need to hide them since on Windows the native
+   * panels when hovering over them can interfere with the
+   * web content */
+  transition: max-height 0s;
+  transition-delay: calc(var(--zen-hidden-toolbar-transition-duration) + 0.2s);
+
+  & .titlebar-button {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+  }
+
+  @media -moz-pref('zen.view.experimental-no-window-controls') or (not -moz-pref("browser.tabs.inTitlebar")) {
+    :root:not([zen-has-bookmarks]) & {
+      max-height: 0 !important;
+      overflow: hidden;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  }
+}
+    }
+
+    /* Hide the top bar completely in fullscreen mode */
+    :root[inDOMFullscreen='true'] & {
+      max-height: 0 !important;
+      min-height: unset !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  }
+}
+
+
+/* ==========================================================================
+  Very Special Occasions - Complex Layout Fixes
+  ========================================================================== */
+
+/* Exclude these complex fixes if in compact mode */
+:root:not([zen-compact-mode='true']) {
+
+  /* --- Fix: Right Sidebar + Collapsed + Standard Window Buttons --- */
+  &[zen-right-side='true']:not([zen-sidebar-expanded='true']):not([zen-window-buttons-reversed='true']) {
+    /* Push toolbox down below the top toolbar */
+    & #navigator-toolbox {
+      margin-top: var(--zen-toolbar-height) !important;
+    }
+    /* Pull window buttons container leftwards over the collapsed sidebar */
+    & .titlebar-buttonbox-container {
+      margin-right: calc(-1 * var(--zen-toolbox-max-width)) !important;
+    }
+    /* Allow overflow for the button box */
+    & #zen-appcontent-wrapper {
+      overflow-x: visible;
+    }
+    /* Reset padding for top buttons */
+    & #zen-sidebar-top-buttons-customization-target {
+      padding-top: 0;
+    }
+    /* Include common fixes for this top-button scenario */
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+&:not([zen-compact-animating])
+  #zen-sidebar-top-buttons:not(:has(#zen-sidebar-top-buttons-customization-target > *:not(#zen-sidebar-top-buttons-separator), .titlebar-buttonbox-container)) {
+  max-height: 0 !important;
+  min-height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+  }
+
+  /* --- Fix: Left Sidebar + Collapsed + Reversed Window Buttons --- */
+  &:not([zen-right-side='true']):not([zen-sidebar-expanded='true'])[zen-window-buttons-reversed='true'] {
+    /* Push toolbox down below the top toolbar */
+    & #navigator-toolbox {
+      margin-top: var(--zen-toolbar-height) !important;
+    }
+    /* Pull window buttons container rightwards over the collapsed sidebar */
+    & .titlebar-buttonbox-container {
+      margin-left: calc(-1 * var(--zen-toolbox-max-width) + var(--zen-toolbox-padding)) !important;
+    }
+    /* Allow overflow for the button box */
+    & #zen-appcontent-wrapper {
+      overflow-x: visible;
+    }
+    /* Reset padding for top buttons */
+    & #zen-sidebar-top-buttons-customization-target {
+      padding-top: 0;
+    }
+    /* Add padding to the right of the nav container */
+    & #zen-appcontent-navbar-container {
+      padding-right: var(--zen-element-separation);
+    }
+    /* Include common fixes for this top-button scenario */
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+&:not([zen-compact-animating])
+  #zen-sidebar-top-buttons:not(:has(#zen-sidebar-top-buttons-customization-target > *:not(#zen-sidebar-top-buttons-separator), .titlebar-buttonbox-container)) {
+  max-height: 0 !important;
+  min-height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+  }
+
+  &:not([zen-right-side='true']):not([zen-sidebar-expanded='true']):not([zen-window-buttons-reversed='true']),
+  &[zen-right-side='true']:not([zen-sidebar-expanded='true'])[zen-window-buttons-reversed='true'] {
+    & #titlebar {
+      padding-top: var(--zen-toolbar-height);
+    }
+
+    & #nav-bar {
+      width: calc(100% + var(--zen-toolbox-max-width) - var(--zen-element-separation));
+
+      /**
+       * We only want it when the window buttons are on the left side, in other
+       * words, the first of the two selectors above.
+       */
+      :root:not([zen-window-buttons-reversed='true']) & {
+        margin-left: calc(-1 * var(--zen-toolbox-max-width) + var(--zen-element-separation) + 4px);
+      }
+    }
+  }
+}
+
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+zen-essentials-promo {
+  background: color-mix(in srgb, var(--zen-primary-color) 40%, transparent);
+  border: 1px solid var(--zen-primary-color);
+  border-radius: var(--border-radius-medium);
+  justify-content: center;
+  align-items: center;
+  padding: 1.1rem 0;
+  flex-direction: column;
+  margin: 2px;
+  text-align: center;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  transition: background 0.1s;
+
+  &:not([dragover="true"]) {
+    background: color-mix(in srgb, var(--zen-primary-color) 60%, transparent);
+    outline: 1px dashed currentColor;
+  }
+
+  :root:is(:not([zen-sidebar-expanded="true"]), [zen-unsynced-window="true"]) & {
+    display: none !important;
+  }
+
+  & image {
+    -moz-context-properties: fill;
+    fill: currentColor;
+    width: 18px;
+    margin-bottom: 4px;
+  }
+
+  & > * {
+    pointer-events: none;
+    max-width: 80%;
+  }
+
+  & .zen-essentials-promo-title {
+    font-weight: 600;
+  }
+
+  & .zen-essentials-promo-sublabel {
+    opacity: 0.8;
+    font-size: smaller;
+    margin: 0;
+  }
+}

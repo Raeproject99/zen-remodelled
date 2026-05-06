@@ -1,0 +1,55 @@
+:root,
+#main-window,
+#zen-main-app-wrapper,
+#zen-appcontent-wrapper,
+#browser,
+#appcontent,
+#tabbrowser-tabbox,
+#tabbrowser-tabpanels,
+browser[type="content"],
+.browserContainer {
+  color-scheme: dark !important;
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+*,
+::before,
+::after {
+  border-radius: 0 !important;
+}
+
+body,
+#tabbrowser-tabpanels {
+  background: var(--theme-bg) !important;
+}
+
+#navigator-toolbox,
+#zen-browser-background,
+.zen-browser-generic-background,
+.zen-browser-generic-background::before,
+.zen-browser-generic-background::after {
+  background: var(--theme-bg) !important;
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+#zen-main-app-wrapper {
+  background: var(--theme-bg) !important;
+}
+
+#zen-appcontent-wrapper,
+#zen-tabbox-wrapper {
+  border-color: var(--theme-border) !important;
+}
+
+#zen-sidebar-splitter,
+splitter {
+  background-color: var(--theme-bg-deep) !important;
+  border-color: var(--theme-border) !important;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--theme-accent) 45%, transparent) !important;
+  color: var(--theme-fg-strong) !important;
+}

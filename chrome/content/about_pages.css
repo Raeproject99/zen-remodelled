@@ -1,0 +1,108 @@
+@-moz-document url-prefix("about:") {
+  :root,
+  html,
+  body {
+    color-scheme: dark !important;
+    background: var(--theme-bg) !important;
+    background-color: var(--theme-bg) !important;
+    color: var(--theme-fg) !important;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-radius: 0 !important;
+  }
+
+  main,
+  section,
+  article,
+  div,
+  dialog {
+    border-color: var(--theme-border) !important;
+  }
+
+  a,
+  .text-link {
+    color: var(--theme-accent) !important;
+  }
+
+  a:hover,
+  .text-link:hover {
+    color: var(--theme-info) !important;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  menulist,
+  richlistbox,
+  tree,
+  listbox {
+    background-color: var(--theme-bg-subtle) !important;
+    color: var(--theme-fg) !important;
+    border-color: var(--theme-border) !important;
+  }
+
+  button:hover,
+  input:hover,
+  select:hover,
+  textarea:hover,
+  menulist:hover {
+    background-color: var(--theme-bg-selected) !important;
+    border-color: var(--theme-border-strong) !important;
+  }
+
+  button:focus-visible,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  menulist:focus {
+    outline: 2px solid var(--theme-accent) !important;
+    outline-offset: 2px !important;
+    border-color: var(--theme-accent) !important;
+  }
+
+  button.primary,
+  button[type="submit"],
+  .primary {
+    background-color: var(--theme-accent) !important;
+    color: var(--theme-bg-deep) !important;
+    border-color: var(--theme-accent) !important;
+  }
+
+  button.primary:hover,
+  button[type="submit"]:hover,
+  .primary:hover {
+    background-color: var(--base16) !important;
+    color: var(--theme-bg-deep) !important;
+  }
+
+  .card,
+  .container,
+  .main-content,
+  .main-content-card,
+  .addon,
+  .extension,
+  .message-bar,
+  notification-message {
+    background-color: var(--theme-bg-subtle) !important;
+    color: var(--theme-fg) !important;
+    border-color: var(--theme-border) !important;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--theme-accent) 45%, transparent) !important;
+    color: var(--theme-fg-strong) !important;
+  }
+}
+
+@-moz-document url("about:blank"), url("about:newtab"), url("about:home"), url("about:privatebrowsing") {
+  html,
+  body {
+    background: var(--theme-bg) !important;
+    background-color: var(--theme-bg) !important;
+    color: var(--theme-fg) !important;
+  }
+}

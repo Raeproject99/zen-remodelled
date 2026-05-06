@@ -1,0 +1,90 @@
+#navigator-toolbox,
+#titlebar,
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar,
+#zen-appcontent-navbar-wrapper,
+#zen-appcontent-navbar-container,
+#zen-sidebar-top-buttons {
+  background: var(--theme-bg) !important;
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-bg-deep) !important;
+  box-shadow: none !important;
+}
+
+#nav-bar {
+  border-top-color: transparent !important;
+}
+
+.titlebar-buttonbox,
+#zen-appcontent-navbar-container {
+  display: none !important;
+}
+
+toolbar,
+toolbaritem,
+toolbarbutton,
+.toolbarbutton-1,
+.toolbarbutton-icon,
+.toolbarbutton-text,
+.toolbarbutton-badge-stack {
+  color: var(--theme-fg) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+toolbarbutton,
+.toolbarbutton-1,
+.subviewbutton,
+#PersonalToolbar .bookmark-item {
+  border-color: transparent !important;
+  border-radius: 0 !important;
+}
+
+toolbarbutton:hover,
+.toolbarbutton-1:hover,
+.subviewbutton:hover,
+#PersonalToolbar .bookmark-item:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+toolbarbutton[open="true"],
+toolbarbutton[checked="true"],
+.toolbarbutton-1[open="true"],
+.toolbarbutton-1[checked="true"],
+.subviewbutton[open="true"],
+.subviewbutton[checked="true"] {
+  background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
+  color: var(--theme-accent) !important;
+}
+
+toolbarbutton[disabled="true"],
+.toolbarbutton-1[disabled="true"],
+#PersonalToolbar .bookmark-item[disabled="true"] {
+  color: var(--theme-fg-muted) !important;
+  opacity: 0.55 !important;
+}
+
+#PersonalToolbar,
+#PlacesToolbarItems,
+#personal-bookmarks {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
+
+#PersonalToolbar .bookmark-item {
+  background-color: transparent !important;
+  color: var(--theme-fg) !important;
+}
+
+#zen-overflow-extensions-list .unified-extensions-item-action-button {
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+}
+
+#zen-overflow-extensions-list .unified-extensions-item-action-button:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}

@@ -1,0 +1,241 @@
+#urlbar,
+#urlbar-container,
+#searchbar,
+.urlbar-input-container,
+.urlbar-input-box,
+.urlbar-input {
+  color: var(--theme-fg) !important;
+}
+
+.urlbar {
+  --urlbarView-separator-color: var(--theme-border) !important;
+  --urlbarView-background: color-mix(in srgb, var(--theme-bg-selected) 30%, var(--theme-bg) 70%) !important;
+  --urlbarView-hover-background: color-mix(in srgb, var(--theme-bg-selected) 75%, var(--theme-bg) 25%) !important;
+  --urlbarView-highlight-background: color-mix(in srgb, var(--theme-bg-selected) 70%, var(--theme-border-strong) 30%) !important;
+  --urlbarView-results-padding: 0 !important;
+}
+
+@keyframes theme-urlbar-floating-expand {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.08);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+@keyframes theme-urlbar-panel-expand {
+  from {
+    opacity: 0;
+    transform: scaleX(0.08);
+  }
+
+  72% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+#urlbar[open][breakout-extend="true"] {
+  animation: theme-urlbar-panel-expand 0.46s cubic-bezier(0.23, 1, 0.32, 1) both !important;
+  transform-origin: center center !important;
+  will-change: transform, opacity !important;
+}
+
+#urlbar[open][zen-floating-urlbar="true"] {
+  animation: theme-urlbar-floating-expand 0.46s cubic-bezier(0.23, 1, 0.32, 1) both !important;
+  transform-origin: center center !important;
+  translate: none !important;
+  will-change: transform, opacity !important;
+}
+
+.urlbar-background,
+#searchbar {
+  background: var(--theme-bg-subtle) !important;
+  background-color: var(--theme-bg-subtle) !important;
+  border: 1px solid var(--theme-border) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#urlbar:not([breakout-extend="true"]):hover .urlbar-background,
+#searchbar:hover {
+  background-color: var(--theme-bg-selected) !important;
+  border-color: var(--theme-border-strong) !important;
+}
+
+#urlbar[focused="true"] > .urlbar-background,
+#urlbar[open="true"] > .urlbar-background,
+#searchbar:focus-within {
+  background-color: var(--theme-bg) !important;
+  border-color: var(--theme-accent) !important;
+  box-shadow: 0 0 0 1px var(--theme-accent) !important;
+}
+
+#urlbar[open="true"] > .urlbar-background {
+  background-color: var(--urlbarView-background) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#urlbar[open="true"] .urlbar-input-container {
+  background-color: var(--theme-bg) !important;
+  border: 1px solid var(--theme-border-strong) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+#urlbar-input::placeholder,
+.urlbar-input::placeholder,
+#searchbar input::placeholder {
+  color: var(--theme-fg-muted) !important;
+  opacity: 1 !important;
+}
+
+.urlbarView,
+#urlbar-results,
+.search-one-offs {
+  background-color: var(--urlbarView-background) !important;
+  color: var(--theme-fg) !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.urlbarView,
+.urlbarView-body-outer,
+.urlbarView-body-inner,
+#urlbar-results {
+  box-sizing: border-box !important;
+  inline-size: 100% !important;
+  max-inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  overflow-x: clip !important;
+}
+
+.urlbarView-body-outer,
+.urlbarView-body-inner,
+.urlbarView-results,
+.urlbarView-row-inner {
+  background-color: transparent !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+}
+
+.urlbarView-body-inner {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: clip !important;
+}
+
+.urlbarView-body-inner::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  border: 1px solid var(--theme-border-strong) !important;
+  border-top: 0 !important;
+  z-index: 2147483647 !important;
+}
+
+.urlbarView-row {
+  color: var(--theme-fg) !important;
+  background-color: transparent !important;
+}
+
+.urlbarView-row + .urlbarView-row {
+  border-top: 1px solid color-mix(in srgb, var(--theme-border-strong) 32%, transparent) !important;
+}
+
+.urlbarView-row:hover {
+  background-color: var(--urlbarView-hover-background) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+.urlbarView-row[selected] {
+  background-color: var(--urlbarView-highlight-background) !important;
+  color: var(--theme-fg-strong) !important;
+}
+
+#urlbar .urlbarView-row:is(:hover, [selected]) .urlbarView-favicon,
+#urlbar .urlbarView-row:is(:hover, [selected]) .urlbarView-favicon img,
+#urlbar .urlbarView-row:is(:hover, [selected]) .urlbarView-shortcutContent {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--theme-info) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+#urlbar .urlbarView-row:is(:hover, [selected]) :is(
+  .urlbarView-button,
+  .urlbarView-button-menu,
+  .urlbarView-action-button,
+  .urlbarView-row-button,
+  button
+) {
+  appearance: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--theme-fg-strong) !important;
+  fill: currentColor !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 6px color-mix(in srgb, var(--theme-info) 45%, transparent) !important;
+}
+
+#urlbar .urlbarView-row:is(:hover, [selected]) :is(
+  .urlbarView-button,
+  .urlbarView-button-menu,
+  .urlbarView-action-button,
+  .urlbarView-row-button,
+  button
+):is(:hover, :focus-visible, [open]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--theme-info) !important;
+}
+
+.urlbarView-title,
+.urlbarView-url,
+.urlbarView-tags,
+.urlbarView-action {
+  color: var(--theme-fg) !important;
+}
+
+.urlbarView-url,
+.urlbarView-action {
+  color: var(--theme-info) !important;
+}
+
+#identity-icon-box,
+#identity-permission-box,
+#tracking-protection-icon-container,
+.urlbar-page-action {
+  color: var(--theme-fg-muted) !important;
+  fill: currentColor !important;
+}
+
+#identity-icon-box:hover,
+#identity-permission-box:hover,
+#tracking-protection-icon-container:hover,
+.urlbar-page-action:hover {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-fg-strong) !important;
+}

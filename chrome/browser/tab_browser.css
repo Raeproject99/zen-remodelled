@@ -1,0 +1,83 @@
+#tabbrowser-tabs,
+#vertical-tabs,
+#zen-tabs-wrapper,
+#zen-tabbox-wrapper {
+  background: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+}
+
+.tabbrowser-tab,
+.tabbrowser-tab .tab-stack,
+.tabbrowser-tab .tab-content {
+  color: var(--theme-fg-muted) !important;
+}
+
+.tabbrowser-tab .tab-background {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab:hover .tab-background {
+  background-color: color-mix(in srgb, var(--theme-fg) 9%, transparent) !important;
+  border-color: var(--theme-border) !important;
+}
+
+.tabbrowser-tab[selected="true"],
+.tabbrowser-tab[visuallyselected="true"] {
+  color: var(--theme-fg-strong) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background,
+.tabbrowser-tab[visuallyselected="true"] .tab-background {
+  background-color: var(--theme-bg-selected) !important;
+  border-color: var(--theme-accent) !important;
+  box-shadow: inset 2px 0 0 var(--theme-accent) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-label,
+.tabbrowser-tab[visuallyselected="true"] .tab-label {
+  color: var(--theme-fg-strong) !important;
+}
+
+.tabbrowser-tab[pending="true"] .tab-label,
+.tabbrowser-tab[discarded="true"] .tab-label {
+  color: var(--theme-fg-muted) !important;
+}
+
+.tabbrowser-tab[busy] .tab-throbber,
+.tabbrowser-tab[progress] .tab-throbber,
+.tabbrowser-tab .tab-loading-burst {
+  color: var(--theme-accent) !important;
+  fill: var(--theme-accent) !important;
+}
+
+.tab-context-line {
+  background-color: var(--theme-accent-alt) !important;
+}
+
+.tabbrowser-tab[soundplaying] .tab-icon-overlay,
+.tabbrowser-tab[muted] .tab-icon-overlay {
+  background-color: var(--theme-bg-selected) !important;
+  color: var(--theme-info) !important;
+  fill: var(--theme-info) !important;
+}
+
+.tab-close-button {
+  color: var(--theme-fg-muted) !important;
+  fill: currentColor !important;
+}
+
+.tab-close-button:hover {
+  background-color: color-mix(in srgb, var(--theme-alert) 20%, transparent) !important;
+  color: var(--theme-alert) !important;
+}
+
+#tabs-newtab-button .toolbarbutton-icon,
+#tabs-newtab-button .toolbarbutton-text {
+  color: var(--theme-info) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--theme-info) 70%, transparent)) saturate(1.25) !important;
+}

@@ -1,0 +1,74 @@
+#zen-sidebar-top-buttons,
+#zen-sidebar-top-buttons-customization-target,
+#zen-tabs-wrapper,
+#zen-tabbox-wrapper,
+#sidebar-box,
+#sidebar-header,
+sidebarheader,
+#sidebar,
+.sidebar-panel {
+  background: var(--theme-bg-subtle) !important;
+  background-color: var(--theme-bg-subtle) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-bg-deep) !important;
+}
+
+#sidebar-box {
+  box-shadow: none !important;
+}
+
+#sidebar-header,
+sidebarheader {
+  border-bottom: 1px solid var(--theme-border) !important;
+}
+
+#sidebar-switcher-target,
+#sidebar-close,
+#sidebarMenu-popup toolbarbutton,
+#sidebarMenu-popup menuitem {
+  color: var(--theme-fg) !important;
+  fill: currentColor !important;
+}
+
+#zen-sidebar-top-buttons toolbarbutton,
+#zen-sidebar-top-buttons .toolbarbutton-1,
+#zen-sidebar-top-buttons image,
+#zen-sidebar-top-buttons .toolbarbutton-icon,
+.zen-current-workspace-indicator-name,
+.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > image:nth-child(2),
+.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > label:nth-child(3) {
+  color: var(--theme-info) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+#zen-sidebar-top-buttons image,
+#zen-sidebar-top-buttons .toolbarbutton-icon,
+.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > image:nth-child(2) {
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--theme-info) 70%, transparent)) saturate(1.25) !important;
+}
+
+.zen-current-workspace-indicator-name,
+.zen-workspace-normal-tabs-section > hbox:nth-child(10) > toolbarbutton:nth-child(2) > label:nth-child(3) {
+  text-shadow: 0 0 8px color-mix(in srgb, var(--theme-info) 55%, transparent) !important;
+}
+
+#sidebar-search-container,
+#search-box,
+.search-box {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+  border-color: var(--theme-border) !important;
+}
+
+#sidebar-splitter {
+  background-color: var(--theme-bg-deep) !important;
+  border-color: var(--theme-bg-deep) !important;
+  opacity: 1 !important;
+}
+
+#toolbar-menubar {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-fg) !important;
+}
