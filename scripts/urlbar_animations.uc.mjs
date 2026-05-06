@@ -33,7 +33,7 @@ const createStyle = () => {
 
     .zen-remodelled-urlbar-focus-layer {
       backdrop-filter: none !important;
-      background: color-mix(in srgb, var(--theme-bg) 38%, transparent) !important;
+      background: color-mix(in srgb, var(--theme-bg) 22%, transparent) !important;
       block-size: 100vh !important;
       inline-size: 100vw !important;
       inset: 0 !important;
@@ -125,19 +125,21 @@ const start = () => {
   focusLayer.setAttribute("aria-hidden", "true");
   document.documentElement.appendChild(focusLayer);
 
-  const focusTargetSelectors = [
-    "browser[type='content']",
-    ".browserContainer",
-    "#tabbrowser-tabpanels",
-    "#appcontent",
-    "#browser",
-    "#zen-appcontent-wrapper",
-    "#zen-sidebar-top-buttons",
-    "#zen-tabs-wrapper",
-    "#sidebar-box",
-    "#sidebar",
-    "#zen-tabbox-wrapper",
-    "#navigator-toolbox"
+  const focusTargetGroups = [
+    [
+      "#zen-appcontent-wrapper",
+      "#appcontent",
+      "#tabbrowser-tabpanels",
+      ".browserContainer",
+      "browser[type='content']"
+    ],
+    [
+      "#zen-tabbox-wrapper",
+      "#zen-tabs-wrapper",
+      "#sidebar-box",
+      "#sidebar",
+      "#zen-sidebar-top-buttons"
+    ]
   ];
 
   const canBlurTarget = (element) => {
@@ -161,20 +163,9 @@ const start = () => {
   const refreshFocusTargets = () => {
     window.clearTimeout(focusTargetCleanupTimer);
 
-    const selectedTargets = [];
-    const candidates = focusTargetSelectors.flatMap((selector) => Array.from(document.querySelectorAll(selector)));
-
-    candidates.forEach((candidate) => {
-      if (!canBlurTarget(candidate)) {
-        return;
-      }
-
-      if (selectedTargets.some((target) => target.contains(candidate) || candidate.contains(target))) {
-        return;
-      }
-
-      selectedTargets.push(candidate);
-    });
+    const selectedTargets = focusTargetGroups
+      .map((selectors) => selectors.map((selector) => document.querySelector(selector)).find(canBlurTarget))
+      .filter(Boolean);
 
     focusTargets.forEach((target) => {
       if (!selectedTargets.includes(target)) {
