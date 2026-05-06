@@ -43,53 +43,6 @@ body,
   border-color: var(--theme-border) !important;
 }
 
-@media -moz-pref("zen.view.compact.hide-tabbar") or -moz-pref("zen.view.use-single-toolbar") {
-  :root[zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
-    --zen-compact-float: var(--zen-element-separation);
-    position: fixed !important;
-    z-index: 10 !important;
-    padding: 0 var(--zen-compact-float) !important;
-    contain: layout paint !important;
-    overflow: clip !important;
-  }
-
-  :root[zen-no-padding="true"][zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
-    --zen-compact-float: 10px;
-    --zen-compact-top-toolbar-hidden-fix: var(--zen-compact-float);
-  }
-
-  :root[zen-compact-animating][zen-single-toolbar="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
-    top: calc(var(--zen-compact-float) / 2 + var(--zen-sidebar-compact-top-offset, 0px)) !important;
-    bottom: var(--zen-compact-float) !important;
-    height: calc(100% - var(--zen-compact-float)) !important;
-  }
-
-  :root[zen-compact-animating]:not([zen-single-toolbar="true"]):not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
-    bottom: calc(var(--zen-compact-float) / 2) !important;
-    height: calc(100% - var(--zen-toolbar-height-with-bookmarks)) !important;
-  }
-
-  :root[zen-compact-mode="true"]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox:not([animate="true"]) {
-    transition: visibility 0.15s ease !important;
-  }
-
-  :root[zen-compact-mode="false"][zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) #navigator-toolbox[animate="true"] {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    transition: none !important;
-  }
-
-  :root[zen-compact-animating]:not([customizing]):not([inDOMFullscreen="true"]) :is(
-    #zen-main-app-wrapper,
-    #browser,
-    #zen-appcontent-wrapper,
-    #tabbrowser-tabbox,
-    #tabbrowser-tabpanels
-  ) {
-    overflow-x: clip !important;
-  }
-}
-
 #zen-sidebar-splitter,
 splitter {
   background-color: var(--theme-bg-deep) !important;
