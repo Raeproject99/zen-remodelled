@@ -32,8 +32,8 @@ const createStyle = () => {
     }
 
     .zen-remodelled-urlbar-focus-layer {
-      backdrop-filter: blur(8px) saturate(0.72) brightness(0.82) !important;
-      background: color-mix(in srgb, var(--theme-bg) 44%, transparent) !important;
+      backdrop-filter: none !important;
+      background: color-mix(in srgb, var(--theme-bg) 38%, transparent) !important;
       block-size: 100vh !important;
       inline-size: 100vw !important;
       inset: 0 !important;
@@ -46,6 +46,16 @@ const createStyle = () => {
 
     .zen-remodelled-urlbar-focus-layer[active] {
       opacity: 1 !important;
+      transition-duration: 0.24s !important;
+    }
+
+    .zen-remodelled-urlbar-focus-target {
+      transition: filter 0.18s ease !important;
+      will-change: filter !important;
+    }
+
+    .zen-remodelled-urlbar-focus-target[zen-remodelled-focus-active] {
+      filter: blur(8px) saturate(0.72) brightness(0.82) !important;
       transition-duration: 0.24s !important;
     }
 
@@ -97,12 +107,14 @@ const start = () => {
 
   const style = createStyle();
   const clones = new Set();
+  const focusTargets = new Set();
   const focusLayer = document.createElementNS(HTML_NS, "div");
   let wasOpen = urlbar.hasAttribute("open");
   let lastRect = null;
   let lastSnapshot = null;
   let captureTimers = [];
   let captureFrame = 0;
+  let focusTargetCleanupTimer = 0;
 
   const clearCaptureTimers = () => {
     captureTimers.forEach((timer) => window.clearTimeout(timer));
@@ -113,8 +125,91 @@ const start = () => {
   focusLayer.setAttribute("aria-hidden", "true");
   document.documentElement.appendChild(focusLayer);
 
+  const focusTargetSelectors = [
+    "browser[type='content']",
+    ".browserContainer",
+    "#tabbrowser-tabpanels",
+    "#appcontent",
+    "#browser",
+    "#zen-appcontent-wrapper",
+    "#zen-sidebar-top-buttons",
+    "#zen-tabs-wrapper",
+    "#sidebar-box",
+    "#sidebar",
+    "#zen-tabbox-wrapper",
+    "#navigator-toolbox"
+  ];
+
+  const canBlurTarget = (element) => {
+    if (!element || element === urlbar || element.contains(urlbar) || urlbar.contains(element)) {
+      return false;
+    }
+
+    const rect = element.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0;
+  };
+
+  const cleanupInactiveFocusTargets = () => {
+    focusTargets.forEach((target) => {
+      if (!target.hasAttribute("zen-remodelled-focus-active")) {
+        target.classList.remove("zen-remodelled-urlbar-focus-target");
+        focusTargets.delete(target);
+      }
+    });
+  };
+
+  const refreshFocusTargets = () => {
+    window.clearTimeout(focusTargetCleanupTimer);
+
+    const selectedTargets = [];
+    const candidates = focusTargetSelectors.flatMap((selector) => Array.from(document.querySelectorAll(selector)));
+
+    candidates.forEach((candidate) => {
+      if (!canBlurTarget(candidate)) {
+        return;
+      }
+
+      if (selectedTargets.some((target) => target.contains(candidate) || candidate.contains(target))) {
+        return;
+      }
+
+      selectedTargets.push(candidate);
+    });
+
+    focusTargets.forEach((target) => {
+      if (!selectedTargets.includes(target)) {
+        target.removeAttribute("zen-remodelled-focus-active");
+      }
+    });
+
+    selectedTargets.forEach((target) => {
+      target.classList.add("zen-remodelled-urlbar-focus-target");
+      target.setAttribute("zen-remodelled-focus-active", "true");
+      focusTargets.add(target);
+    });
+  };
+
+  const clearFocusTargets = (immediate = false) => {
+    window.clearTimeout(focusTargetCleanupTimer);
+
+    focusTargets.forEach((target) => {
+      target.removeAttribute("zen-remodelled-focus-active");
+    });
+
+    if (immediate) {
+      cleanupInactiveFocusTargets();
+    } else {
+      focusTargetCleanupTimer = window.setTimeout(cleanupInactiveFocusTargets, 220);
+    }
+  };
+
   const syncFocusLayer = (isOpen) => {
     focusLayer.toggleAttribute("active", isOpen);
+    if (isOpen) {
+      refreshFocusTargets();
+    } else {
+      clearFocusTargets();
+    }
   };
 
   const cloneOpenUrlbar = (rect) => {
@@ -274,6 +369,8 @@ const start = () => {
     if (captureFrame) {
       window.cancelAnimationFrame(captureFrame);
     }
+    window.clearTimeout(focusTargetCleanupTimer);
+    clearFocusTargets(true);
     observer.disconnect();
     captureObserver.disconnect();
     urlbar.removeEventListener("input", inputListener, true);
