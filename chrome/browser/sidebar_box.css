@@ -51,95 +51,56 @@ sidebarheader {
 
 #zen-create-new-button,
 #downloads-button {
-  --toolbarbutton-icon-fill: var(--theme-fg) !important;
-  --toolbarbutton-icon-fill-attention: var(--theme-fg) !important;
-  color: var(--theme-fg) !important;
-  fill: currentColor !important;
+  --sidebar-footer-button-color: var(--theme-info);
+  --toolbarbutton-icon-fill: var(--sidebar-footer-button-color) !important;
+  --toolbarbutton-icon-fill-attention: var(--sidebar-footer-button-color) !important;
+  color: var(--sidebar-footer-button-color) !important;
+  fill: var(--sidebar-footer-button-color) !important;
   fill-opacity: 1 !important;
-  stroke: currentColor !important;
+  stroke: var(--sidebar-footer-button-color) !important;
   filter: none !important;
   opacity: 1 !important;
 }
 
 #zen-create-new-button:hover,
 #downloads-button:hover {
+  --sidebar-footer-button-color: var(--theme-info);
   background-color: var(--theme-bg-selected) !important;
-  color: var(--theme-fg-strong) !important;
+  color: var(--sidebar-footer-button-color) !important;
 }
 
 #zen-create-new-button:is([open="true"], [checked="true"]),
 #downloads-button:is([open="true"], [checked="true"]) {
+  --sidebar-footer-button-color: var(--theme-accent);
   background-color: color-mix(in srgb, var(--theme-accent) 22%, transparent) !important;
-  color: var(--theme-accent) !important;
+  color: var(--sidebar-footer-button-color) !important;
 }
 
-#zen-create-new-button :is(
-  image,
-  .toolbarbutton-icon,
-  .toolbarbutton-text,
-  .toolbarbutton-badge-stack
-),
-#downloads-button :is(
-  image,
-  .toolbarbutton-icon,
-  .toolbarbutton-animatable-image,
-  .toolbarbutton-badge-stack,
-  #downloads-indicator-icon,
-  #downloads-indicator-progress-icon,
-  #downloads-indicator-start-image,
-  #downloads-indicator-finish-image
-) {
-  --toolbarbutton-icon-fill: var(--theme-fg) !important;
-  --toolbarbutton-icon-fill-attention: var(--theme-fg) !important;
+#zen-create-new-button > image.toolbarbutton-icon,
+#zen-create-new-button > .toolbarbutton-icon,
+#downloads-button > image.toolbarbutton-icon,
+#downloads-button > .toolbarbutton-icon,
+#downloads-button .toolbarbutton-animatable-image,
+#downloads-button #downloads-indicator-icon,
+#downloads-button #downloads-indicator-progress-icon,
+#downloads-button #downloads-indicator-start-image,
+#downloads-button #downloads-indicator-finish-image {
+  --toolbarbutton-icon-fill: var(--sidebar-footer-button-color) !important;
+  --toolbarbutton-icon-fill-attention: var(--sidebar-footer-button-color) !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
-  color: var(--theme-fg) !important;
-  fill: currentColor !important;
+  color: var(--sidebar-footer-button-color) !important;
+  fill: var(--sidebar-footer-button-color) !important;
   fill-opacity: 1 !important;
-  stroke: currentColor !important;
+  stroke: var(--sidebar-footer-button-color) !important;
   filter: none !important;
   opacity: 1 !important;
 }
 
-#zen-create-new-button:hover :is(
-  image,
-  .toolbarbutton-icon,
-  .toolbarbutton-text,
-  .toolbarbutton-badge-stack
-),
-#downloads-button:hover :is(
-  image,
-  .toolbarbutton-icon,
-  .toolbarbutton-animatable-image,
-  .toolbarbutton-badge-stack,
-  #downloads-indicator-icon,
-  #downloads-indicator-progress-icon,
-  #downloads-indicator-start-image,
-  #downloads-indicator-finish-image
-) {
-  --toolbarbutton-icon-fill: var(--theme-fg-strong) !important;
-  --toolbarbutton-icon-fill-attention: var(--theme-fg-strong) !important;
-  color: var(--theme-fg-strong) !important;
-}
-
-#zen-create-new-button:is([open="true"], [checked="true"]) :is(
-  image,
-  .toolbarbutton-icon,
-  .toolbarbutton-text,
-  .toolbarbutton-badge-stack
-),
-#downloads-button:is([open="true"], [checked="true"]) :is(
-  image,
-  .toolbarbutton-icon,
-  .toolbarbutton-animatable-image,
-  .toolbarbutton-badge-stack,
-  #downloads-indicator-icon,
-  #downloads-indicator-progress-icon,
-  #downloads-indicator-start-image,
-  #downloads-indicator-finish-image
-) {
-  --toolbarbutton-icon-fill: var(--theme-accent) !important;
-  --toolbarbutton-icon-fill-attention: var(--theme-accent) !important;
-  color: var(--theme-accent) !important;
+#zen-create-new-button > .toolbarbutton-text,
+#downloads-button > .toolbarbutton-text,
+#zen-create-new-button > .toolbarbutton-badge-stack,
+#downloads-button > .toolbarbutton-badge-stack {
+  color: var(--sidebar-footer-button-color) !important;
 }
 
 .zen-current-workspace-indicator-name,
