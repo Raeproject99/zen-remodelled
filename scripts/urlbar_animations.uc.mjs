@@ -32,8 +32,8 @@ const createStyle = () => {
     }
 
     .zen-remodelled-urlbar-focus-layer {
-      backdrop-filter: blur(2px) saturate(0.88) !important;
-      background: color-mix(in srgb, var(--theme-bg) 26%, transparent) !important;
+      backdrop-filter: blur(8px) saturate(0.72) brightness(0.82) !important;
+      background: color-mix(in srgb, var(--theme-bg) 44%, transparent) !important;
       block-size: 100vh !important;
       inline-size: 100vw !important;
       inset: 0 !important;
