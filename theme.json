@@ -1,0 +1,19 @@
+{
+  "id": "zen-remodelled",
+  "name": "Zen Remodelled",
+  "description": "Tokyo Night Dark Base24 theme for Zen Browser.",
+  "homepage": "https://github.com/Raeproject99/zen-remodelled",
+  "author": "Raeproject99",
+  "version": "0.1.0",
+  "style": {
+    "chrome": "chrome/userChrome.css",
+    "content": "chrome/userContent.css"
+  },
+  "scripts": {
+    "scripts/urlbar_animations.uc.mjs": {
+      "include": ["chrome://browser/content/browser.xhtml"],
+      "loadOrder": 20
+    }
+  },
+  "supportsUnload": true
+}
